@@ -1,17 +1,12 @@
-import React from 'react';
-import { Platform, ActivityIndicator,
-  AsyncStorage,
-  Button,
-  StatusBar,
-  StyleSheet,
-  View  } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
-import SignInScreen from '../screens/Login';
+import {createStackNavigator} from 'react-navigation';
+import LoginHome from '../screens/Login';
+import SignInScreen from '../screens/SignIn';
 
 const AuthStack = createStackNavigator(
-  {
-    Landing: SignInScreen,
-  }
+    {
+      Landing: LoginHome,
+      SignIn: SignInScreen,
+    }
 );
 
 AuthStack.path = '';

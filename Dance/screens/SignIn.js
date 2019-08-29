@@ -1,8 +1,12 @@
 import React from 'react';
-import {AsyncStorage, View, Image, StyleSheet} from 'react-native';
+import {AsyncStorage, View, StyleSheet, Image} from 'react-native';
 import {
   Button,
   Text,
+  Form,
+  Item,
+  Input,
+  Label,
 } from 'native-base';
 
 // Make each screen a class that extends React.Component, its easier to
@@ -18,22 +22,26 @@ class LoginHome extends React.Component {
   render() {
     return (
       <View style={styles.mainView}>
-        <View style={styles.logoView}>
-          <Image style={styles.pic}
-            source={ require('../assets/images/white.png')}
-          />
+        <View style={styles.formView}>
+          <Form>
+            <Item stackedLabel>
+              <Label style={{color: 'white', paddingBottom: 10}}>Username</Label>
+              <Input style={{color: 'white', fontSize: 20}} />
+            </Item>
+            <Item stackedLabel>
+              <Label style={{color: 'white'}}>Password</Label>
+              <Input
+                secureTextEntry= {true}
+                style={{color: 'white', fontSize: 20}}
+              />
+            </Item>
+          </Form>
         </View>
         <View style={styles.buttonView}>
           <Button large block light rounded onPress={this._signInAsync}>
             <Text
               style={{color: 'black', fontWeight: 'bold', fontSize: 15}}>
               Sign in
-            </Text>
-          </Button>
-          <Button large block light rounded onPress={this._signInAsync}>
-            <Text
-              style={{color: 'black', fontWeight: 'bold', fontSize: 15}}>
-              Sign Up
             </Text>
           </Button>
         </View>
@@ -44,7 +52,7 @@ class LoginHome extends React.Component {
   // This is what authenticates the sign in
   _signInAsync = async () => {
     await AsyncStorage.setItem('userToken', 'abc');
-    this.props.navigation.navigate('SignIn');
+    this.props.navigation.navigate('Main');
   };
 }
 
@@ -70,15 +78,16 @@ const styles = StyleSheet.create({
   mainView: {
     backgroundColor: '#782F40',
     flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   logoView: {
     flex: 2,
   },
+  formView: {
+    marginTop: '40%',
+    marginBottom: '10%',
+  },
 });
 
-/* Things to add:
--> Feature to move input so you can see what you type
--> Nicer button
--> May switch to different authentication (Facebook/Google)
--> Guest option
-*/
+
