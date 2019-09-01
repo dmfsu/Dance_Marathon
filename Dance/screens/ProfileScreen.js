@@ -16,7 +16,11 @@ class ProfileScreen extends React.Component {
   		<Avatar></Avatar>
   		<Text style={{alignSelf: 'center', fontSize: 25}}> Jason Santos </Text>
   		<ProfileInfo></ProfileInfo>
+
   		<Button title='sign me out' onPress={this._signOutAsync} />
+
+  		<Button title='Sign out' onPress={this._signOutAsync} />
+
 
   	</View>
 
