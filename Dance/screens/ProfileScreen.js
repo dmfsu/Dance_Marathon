@@ -1,35 +1,54 @@
 import React from 'react';
-import { AsyncStorage, Text, Button, View, AppRegistry } from 'react-native';
-import { ExpoConfigView } from '@expo/samples';
+import {
+  AsyncStorage,
+  Text,
+  Button,
+  Platform,
+  View,
+  StyleSheet,
+  SafeAreaView} from 'react-native';
 import Avatar from '../components/Avatar';
 import ProfileInfo from '../components/profileInfo';
 
-
+/** Profile screen*/
 class ProfileScreen extends React.Component {
   static navigationOptions = {
-    header: null
+    header: null,
   };
-
+  /** @return {screen} */
   render() {
-  return(
-  	<View>
-  		<Avatar></Avatar>
-  		<Text style={{alignSelf: 'center', fontSize: 25}}> Jason Santos </Text>
-  		<ProfileInfo></ProfileInfo>
-
-  		<Button title='sign me out' onPress={this._signOutAsync} />
-
-  		<Button title='Sign out' onPress={this._signOutAsync} />
-
-
-  	</View>
-
-  );
-}
-_signOutAsync = async () => {
-		    await AsyncStorage.clear();
-		    this.props.navigation.navigate('Auth');
-  		};
+    return (
+      <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+        <View style={styles.androidBar}>
+        </View>
+        <View style={styles.mainView}>
+          <Avatar></Avatar>
+          <Text style={styles.text}> Jason Santos </Text>
+          <ProfileInfo></ProfileInfo>
+          <Button title='sign me out' onPress={this._signOutAsync} />
+        </View>
+      </SafeAreaView>
+    );
+  }
+  _signOutAsync = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('Auth');
+  };
 }
 
 export default ProfileScreen;
+
+const styles = StyleSheet.create({
+  mainView: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  androidBar: {
+    height: Platform.OS === 'ios'? 0:39,
+    backgroundColor: 'white',
+  },
+  text: {
+    alignSelf: 'center',
+    fontSize: 25,
+  },
+});
