@@ -61,7 +61,7 @@ export default function LinksScreen() {
 }
 
 LinksScreen.navigationOptions = {
-  title: 'Links',
+  title: 'Events',
 };
 
 const styles = StyleSheet.create({

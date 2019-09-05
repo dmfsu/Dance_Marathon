@@ -1,7 +1,6 @@
 import React from 'react';
 import {Platform} from 'react-native';
-import {icons} from 'native-base';
-import {createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator} from 'react-navigation';
+import {createStackNavigator, createMaterialTopTabNavigator} from 'react-navigation';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
@@ -15,7 +14,7 @@ const HomeStack = createStackNavigator(
 );
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Events',
+  tabBarLabel: 'Fundraising',
   tabBarIcon: ({focused}) => (
     <TabBarIcon
       focuse = { focused }
@@ -37,7 +36,7 @@ const LinksStack = createStackNavigator(
 );
 
 LinksStack.navigationOptions = {
-  tabBarLabel: 'Camera',
+  tabBarLabel: 'Events',
   tabBarIcon: ({focused}) => (
     <TabBarIcon
       name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
@@ -71,15 +70,19 @@ const tabNavigator = createMaterialTopTabNavigator({
 {
   tabBarPosition: 'bottom',
   tabBarOptions: {
-    activeTintColor: 'white',
-    inactiveTintColor: 'white',
+    activeTintColor: 'black',
+    inactiveTintColor: 'grey',
     showIcon: true,
     style: {
-      backgroundColor: '#782F40',
-      height: '9%',
+      backgroundColor: '#EEEEEE',
+      height: '8%',
     },
     indicatorStyle: {
       height: 0,
+    },
+    labelStyle: {
+      fontSize: 12,
+      fontWeight: 'bold',
     },
   },
 });

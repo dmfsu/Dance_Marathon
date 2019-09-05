@@ -19,14 +19,16 @@ class ProfileScreen extends React.Component {
   render() {
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-        <View style={styles.androidBar}>
-        </View>
+        <View style={styles.androidBar}></View>
         <View style={styles.mainView}>
-          <Avatar></Avatar>
-          <Text style={styles.text}> Jason Santos </Text>
-          <ProfileInfo></ProfileInfo>
-          <Button title='sign me out' onPress={this._signOutAsync} />
+          <View style={styles.profileTop}>
+            <Text style={styles.text}> Jason Santos </Text>
+            <Avatar></Avatar>
+          </View>
+          <View style={styles.info}>
+          </View>
         </View>
+
       </SafeAreaView>
     );
   }
@@ -41,14 +43,25 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
   mainView: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#CEB888',
   },
   androidBar: {
     height: Platform.OS === 'ios'? 0:39,
-    backgroundColor: 'white',
+    backgroundColor: '#782F40',
   },
   text: {
     alignSelf: 'center',
-    fontSize: 25,
+    fontSize: 30,
+    color: 'white',
+    paddingTop: '15%',
+    fontWeight: 'bold',
+  },
+  profileTop: {
+    height: '50%',
+    backgroundColor: '#782F40',
+  },
+  info: {
+    backgroundColor: '#CEB888',
+    flex: 1,
   },
 });

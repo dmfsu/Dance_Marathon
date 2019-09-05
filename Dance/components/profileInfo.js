@@ -4,7 +4,7 @@ import { Container, Header, Content, List, ListItem, Separator } from 'native-ba
 
 export default function ProfileInfo() {
   return (
-  	<View>
+  	<View style= {{alignContent: 'flex-start'}} >
           <Separator bordered>
             <Text>Username</Text>
           </Separator>
