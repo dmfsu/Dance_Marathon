@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 
 /** @return {Component}*/
-export default function Avatar() {
+export default function Info() {
   return (
     <View style={styles.mainView}>
       <View style={styles.rankView}>
@@ -17,7 +17,7 @@ export default function Avatar() {
 const styles = StyleSheet.create({
   rankView: {
     alignSelf: 'center',
-    marginTop: '9%',
+    marginTop: '4%',
     right: '2.5%',
   },
   mainView: {
