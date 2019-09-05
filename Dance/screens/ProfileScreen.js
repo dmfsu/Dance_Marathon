@@ -24,8 +24,10 @@ class ProfileScreen extends React.Component {
           <View style={styles.profileTop}>
             <Text style={styles.text}> Jason Santos </Text>
             <Avatar></Avatar>
+            <ProfileInfo />
           </View>
           <View style={styles.info}>
+
           </View>
         </View>
 
@@ -51,13 +53,13 @@ const styles = StyleSheet.create({
   },
   text: {
     alignSelf: 'center',
-    fontSize: 30,
+    fontSize: 28,
     color: 'white',
-    paddingTop: '15%',
+    paddingTop: '10%',
     fontWeight: 'bold',
   },
   profileTop: {
-    height: '50%',
+    height: '45%',
     backgroundColor: '#782F40',
   },
   info: {

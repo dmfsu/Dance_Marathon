@@ -74,7 +74,7 @@ const tabNavigator = createMaterialTopTabNavigator({
     inactiveTintColor: 'grey',
     showIcon: true,
     style: {
-      backgroundColor: '#EEEEEE',
+      backgroundColor: '#FFFFFF',
       height: '8%',
     },
     indicatorStyle: {
