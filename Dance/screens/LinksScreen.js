@@ -30,11 +30,10 @@ export default function LinksScreen() {
               <Left><Text>Oglesby Union</Text></Left>
               <Right><Text>9/3 8:00PM - 10:00PM</Text></Right>
             </CardItem>
-
           </Card>
 
           <Card style={{ backgroundColor: '#782F40' }}>
-            <CardItem header style={{ backgroundColor: '#782F40', fontFamily: 'ChalkboardSE-Light' }}>
+            <CardItem header style={{ backgroundColor: '#782F40', fontFamily: 'Chalkboardf' }}>
               <Left><Text style={{ fontSize: 18 }}> Bikes 4Tykes</Text></Left>
               <Right>
                 <Image style={{ flex: 1, height: 20, width: 60 }}
@@ -61,7 +60,7 @@ export default function LinksScreen() {
 }
 
 LinksScreen.navigationOptions = {
-  title: 'Links',
+  title: 'Events',
 };
 
 const styles = StyleSheet.create({
