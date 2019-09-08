@@ -14,7 +14,7 @@ export default function LinksScreen() {
 
           <Card style={{ backgroundColor: '#782F40' }}>
             <CardItem header style={{ backgroundColor: '#782F40' }}>
-              <Left><Text style={{ fontSize: 20, fontFamily: 'SavoyeLetPlain' }}> First GBM</Text></Left>
+              <Left><Text style={{ fontSize: 22 }}> First GBM</Text></Left>
               <Right>
                 <Image style={{ flex: 1, height: 20, width: 60 }}
                 source={ require('../assets/images/gold_star.jpg')}/>
@@ -30,10 +30,11 @@ export default function LinksScreen() {
               <Left><Text>Oglesby Union</Text></Left>
               <Right><Text>9/3 8:00PM - 10:00PM</Text></Right>
             </CardItem>
+
           </Card>
 
           <Card style={{ backgroundColor: '#782F40' }}>
-            <CardItem header style={{ backgroundColor: '#782F40', fontFamily: 'Chalkboardf' }}>
+            <CardItem header style={{ backgroundColor: '#782F40' }}>
               <Left><Text style={{ fontSize: 18 }}> Bikes 4Tykes</Text></Left>
               <Right>
                 <Image style={{ flex: 1, height: 20, width: 60 }}
