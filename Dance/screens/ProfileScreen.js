@@ -3,6 +3,7 @@ import {
   Platform,
   View,
   StyleSheet,
+  Button,
   SafeAreaView} from 'react-native';
 import BackDropTop from '../components/BackDropTop';
 import BackDropBottom from '../components/BackDropBottom';
@@ -17,6 +18,10 @@ export default class ProfileScreen extends React.Component {
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
         <View style={styles.androidBar}></View>
+        <Button
+          title='Press me'
+          onPress = {() => this.props.navigation.openDrawer()}
+        />
         <BackDropTop />
         <BackDropBottom />
       </SafeAreaView>

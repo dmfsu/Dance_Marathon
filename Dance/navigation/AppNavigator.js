@@ -2,15 +2,15 @@ import {
   createAppContainer,
   createSwitchNavigator,
 } from 'react-navigation';
-import MainTabNavigator from './MainTabNavigator';
 import AuthStack from './AuthStack';
+import appDrawerNavigator from './DrawerNavigator';
 
 export default createAppContainer(
     createSwitchNavigator({
       Auth: AuthStack,
-      Main: MainTabNavigator,
+      Dashboard: appDrawerNavigator,
     },
     {
-      initialRouteName: 'Main',
+      initialRouteName: 'Dashboard',
     })
 );

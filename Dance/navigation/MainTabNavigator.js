@@ -1,41 +1,19 @@
 import React from 'react';
 import {Platform} from 'react-native';
-import {createStackNavigator, createMaterialTopTabNavigator} from 'react-navigation';
+import {
+  createStackNavigator,
+  createMaterialTopTabNavigator} from 'react-navigation';
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
-
-const HomeStack = createStackNavigator(
+const EventsStack = createStackNavigator(
     {
-      Home: HomeScreen,
+      Events: LinksScreen,
     },
 );
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Fundraising',
-  tabBarIcon: ({focused}) => (
-    <TabBarIcon
-      focuse = { focused }
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
-};
-
-HomeStack.path = '';
-
-const LinksStack = createStackNavigator(
-    {
-      Links: LinksScreen,
-    },
-);
-
-LinksStack.navigationOptions = {
+EventsStack.navigationOptions = {
   tabBarLabel: 'Events',
   tabBarIcon: ({focused}) => (
     <TabBarIcon
@@ -44,7 +22,7 @@ LinksStack.navigationOptions = {
   ),
 };
 
-LinksStack.path = '';
+EventsStack.path = '';
 
 const ProfileStack = createStackNavigator(
     {
@@ -63,9 +41,8 @@ ProfileStack.navigationOptions = {
 ProfileStack.path = '';
 
 const tabNavigator = createMaterialTopTabNavigator({
-  HomeStack,
-  LinksStack,
   ProfileStack,
+  EventsStack,
 },
 {
   tabBarPosition: 'bottom',

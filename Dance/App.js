@@ -1,11 +1,12 @@
-import { AppLoading } from 'expo';
-import { Asset } from 'expo-asset';
+import {AppLoading} from 'expo';
+import {Asset} from 'expo-asset';
 import * as Font from 'expo-font';
-import React, { useState } from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React, {useState} from 'react';
+import {Platform, StatusBar, StyleSheet, View} from 'react-native';
+import {Ionicons} from '@expo/vector-icons';
 import AppNavigator from './navigation/AppNavigator';
 
+/** @return {app} */
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
@@ -27,6 +28,7 @@ export default function App(props) {
   }
 }
 
+/** loads fonts */
 async function loadResourcesAsync() {
   await Promise.all([
     Asset.loadAsync([
@@ -39,9 +41,7 @@ async function loadResourcesAsync() {
       // We include SpaceMono because we use it in HomeScreen.js. Feel free to
       // remove this if you are not using it in your app
       Roboto: require('./node_modules/native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('./node_modules/native-base/Fonts/Roboto_medium.ttf'),
-      SavoyeLetPlain: require('./assets/fonts/SavoyeLetPlain.ttf'),
-      Chalkboard: require('./assets/fonts/chalkboard-se-light.ttf')
+      Roboto_medium: require('./node_modules/native-base/Fonts/Roboto_medium.ttf')
     }),
   ]);
 }
