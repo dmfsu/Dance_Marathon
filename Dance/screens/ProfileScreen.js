@@ -19,7 +19,7 @@ export default class ProfileScreen extends React.Component {
       <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
         <View style={styles.androidBar}></View>
         <Button
-          title='Press me'
+          title='Press'
           onPress = {() => this.props.navigation.openDrawer()}
         />
         <BackDropTop />
