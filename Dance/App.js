@@ -41,7 +41,9 @@ async function loadResourcesAsync() {
       // We include SpaceMono because we use it in HomeScreen.js. Feel free to
       // remove this if you are not using it in your app
       Roboto: require('./node_modules/native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('./node_modules/native-base/Fonts/Roboto_medium.ttf')
+      Roboto_medium: require('./node_modules/native-base/Fonts/Roboto_medium.ttf'),
+      SavoyeLetPlain: require('./assets/fonts/SavoyeLetPlain.ttf'),
+      ChalkboardSELight: require('./assets/fonts/chalkboard-se-light.ttf'),
     }),
   ]);
 }

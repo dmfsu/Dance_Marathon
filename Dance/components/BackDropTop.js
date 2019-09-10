@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-import {Icon} from 'native-base';
+import {Icon, Button} from 'native-base';
 import Avatar from '../components/Avatar';
 import Info from '../components/profileInfo';
 
@@ -10,8 +10,10 @@ export default class BackDropTop extends React.Component {
   render() {
     return (
       <View style={styles.backDropTop}>
-        <View style={styles.icons}>
-          <Icon name='menu' style={{fontSize: 35, color: '#CEB888'}} />
+        <View style={{width: '12%'}}>
+          <Button iconLeft transparent onPress = {this.props.open}>
+            <Icon name='menu' style={{fontSize: 35, color: '#CEB888'}} />
+          </Button>
         </View>
         <Text style={styles.text}> Jason Santos </Text>
         <Avatar />
