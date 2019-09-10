@@ -42,7 +42,7 @@ export default function LinksScreen() {
           </Card>
 
           <Card style={{ backgroundColor: '#782F40' }}>
-            <CardItem header style={{ backgroundColor: '#782F40', fontFamily: 'ChalkboardSE-Light' }}>
+            <CardItem header style={{ backgroundColor: '#782F40', fontFamily: 'ChalkboardSELight' }}>
               <Left><Text style={{ fontSize: 18 }}> Bikes 4Tykes</Text></Left>
               <Right>
                 <Image style={{ flex: 1, height: 20, width: 60 }}
