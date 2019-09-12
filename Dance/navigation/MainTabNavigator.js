@@ -6,6 +6,7 @@ import {
 import TabBarIcon from '../components/TabBarIcon';
 import LinksScreen from '../screens/LinksScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 const EventsStack = createStackNavigator(
     {
@@ -26,7 +27,7 @@ EventsStack.path = '';
 
 const ProfileStack = createStackNavigator(
     {
-      Profile: ProfileScreen,
+      Profile: ProfileScreen, SettingsScreen,
     },
 );
 
