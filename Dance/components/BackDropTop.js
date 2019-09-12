@@ -10,9 +10,12 @@ export default class BackDropTop extends React.Component {
   render() {
     return (
       <View style={styles.backDropTop}>
-        <View style={{width: '12%'}}>
+        <View style={styles.button}>
           <Button iconLeft transparent onPress = {this.props.open}>
             <Icon name='menu' style={{fontSize: 35, color: '#CEB888'}} />
+          </Button>
+          <Button iconLeft transparent onPress = {this.props.open}>
+            <Icon name='settings' style={{fontSize: 35, color: '#CEB888'}} />
           </Button>
         </View>
         <Text style={styles.text}> Jason Santos </Text>
@@ -35,10 +38,11 @@ const styles = StyleSheet.create({
     paddingTop: '1%',
     fontWeight: 'bold',
   },
-  icons: {
+  button: {
     flexDirection: 'row',
-    flex: 1,
-    left: '8%',
-    paddingTop: '5%',
+    justifyContent: 'center',
+    justifyContent: 'space-between',
+    marginRight: '5%',
+    height: '18%',
   },
 });
