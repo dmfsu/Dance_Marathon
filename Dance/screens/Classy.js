@@ -7,19 +7,21 @@ class Classy extends React.Component {
     super(props);
     this.state = {
       loading: true,
-      users: '',
+      username: '',
+      email: '',
     };
   }
 
   componentDidMount = () => {
-      fetch('http://elmango.pythonanywhere.com/users/?format=json', {
+      fetch('http://elmango.pythonanywhere.com/users/1/?format=json', {
          method: 'GET'
       })
       .then((response) => response.json())
       .then((responseJson) => {
          console.log(responseJson);
          this.setState({
-            users: responseJson
+            username: responseJson.username,
+            email: responseJson.email,
          })
       })
       .catch((error) => {
@@ -28,7 +30,8 @@ class Classy extends React.Component {
    }
 
    consoleMessage=()=>{
-    this.state.users.map(anyIdentifierName=>console.log(anyIdentifierName.points));
+    console.log(this.state.username)
+    console.log(this.state.email)
    }
 
   render() {
