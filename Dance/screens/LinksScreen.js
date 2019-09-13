@@ -19,7 +19,7 @@ export default function LinksScreen() {
 
 
         {this.state.events.map(event=>(console.log(event.points)
-          //if this doesn't work, delete the JS stuff
+          {//if this doesn't work, delete the JS stuff}
 
 
           <Card style={{ backgroundColor: '#782F40' }}>
