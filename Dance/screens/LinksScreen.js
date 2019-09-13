@@ -17,9 +17,13 @@ export default function LinksScreen() {
       <Container>
         <Content>
 
+
+        {this.state.events.map(event=>(console.log(event.points)
+
           <Card style={{ backgroundColor: '#782F40' }}>
             <CardItem header style={{ backgroundColor: '#782F40' }}>
-              <Left><Text style={{ fontSize: 20, fontFamily: 'SavoyeLetPlain' }}> First GBM</Text></Left>
+              <Left><Text style={{ fontSize: 20, fontFamily: 'SavoyeLetPlain' }}> event.name</Text></Left>
+
               <Right>
                 <Image style={{ flex: 1, height: 20, width: 60 }}
                 source={ require('../assets/images/gold_star.jpg')}/>
@@ -39,10 +43,12 @@ export default function LinksScreen() {
               <Accordion dataArray={description1}/>
             </CardItem>
 
-          </Card>
+
+          </Card>))}
 
           <Card style={{ backgroundColor: '#782F40' }}>
-            <CardItem header style={{ backgroundColor: '#782F40', fontFamily: 'ChalkboardSELight' }}>
+            <CardItem header style={{ backgroundColor: '#782F40', fontFamily: 'ChalkboardSE-Light' }}>
+
               <Left><Text style={{ fontSize: 18 }}> Bikes 4Tykes</Text></Left>
               <Right>
                 <Image style={{ flex: 1, height: 20, width: 60 }}
@@ -62,6 +68,7 @@ export default function LinksScreen() {
             <CardItem footer style={{ backgroundColor: '#CEB888'}}>
               <Accordion dataArray={description2}/>
             </CardItem>
+
 
           </Card>
 

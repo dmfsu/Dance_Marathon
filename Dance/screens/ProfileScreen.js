@@ -7,8 +7,9 @@ import {
 import BackDropTop from '../components/BackDropTop';
 import BackDropBottom from '../components/BackDropBottom';
 
-/** Profile screen*/
-export default class ProfileScreen extends React.Component {
+//username, position, "points", organization, 
+
+class ProfileScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
