@@ -1,23 +1,16 @@
-import React from 'react';
-import { ActivityIndicator,
-  AsyncStorage,
-  Button,
-  StatusBar,
-  StyleSheet,
-  View } from 'react-native';
-import { createAppContainer, createSwitchNavigator, createStackNavigator } from 'react-navigation';
-
-import MainTabNavigator from './MainTabNavigator';
+import {
+  createAppContainer,
+  createSwitchNavigator,
+} from 'react-navigation';
 import AuthStack from './AuthStack';
-
-
+import appDrawerNavigator from './DrawerNavigator';
 
 export default createAppContainer(
-  createSwitchNavigator({
-    Auth: AuthStack,
-    Main: MainTabNavigator,
-  },
-  {
-    initialRouteName: 'Auth',
-  })
+    createSwitchNavigator({
+      Auth: AuthStack,
+      Dashboard: appDrawerNavigator,
+    },
+    {
+      initialRouteName: 'Dashboard',
+    })
 );

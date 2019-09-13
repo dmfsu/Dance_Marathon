@@ -11,13 +11,12 @@ const description2 = [
   { title: "More:", content: "Bikes4Tykes is a charity event that helps provide bikes for underpriveleged kids. They collect donations to purchase bicycles and helmets for donation to Toys For Tots and The Salvation Army at Christmas time." }  
 ];
 
-
-
 export default function LinksScreen() {
   return (
     <ScrollView style={styles.container}>
       <Container>
         <Content>
+
 
         {this.state.events.map(event=>(console.log(event.points)
           //if this doesn't work, delete the JS stuff
@@ -26,6 +25,7 @@ export default function LinksScreen() {
           <Card style={{ backgroundColor: '#782F40' }}>
             <CardItem header style={{ backgroundColor: '#782F40' }}>
               <Left><Text style={{ fontSize: 20, fontFamily: 'SavoyeLetPlain' }}> event.name</Text></Left>
+
               <Right>
                 <Image style={{ flex: 1, height: 20, width: 60 }}
                 source={ require('../assets/images/gold_star.jpg')}/>
@@ -45,10 +45,12 @@ export default function LinksScreen() {
               <Accordion dataArray={description1}/>
             </CardItem>
 
+
           </Card>))}
 
           <Card style={{ backgroundColor: '#782F40' }}>
             <CardItem header style={{ backgroundColor: '#782F40', fontFamily: 'ChalkboardSE-Light' }}>
+
               <Left><Text style={{ fontSize: 18 }}> Bikes 4Tykes</Text></Left>
               <Right>
                 <Image style={{ flex: 1, height: 20, width: 60 }}
@@ -68,6 +70,7 @@ export default function LinksScreen() {
             <CardItem footer style={{ backgroundColor: '#CEB888'}}>
               <Accordion dataArray={description2}/>
             </CardItem>
+
 
           </Card>
 
