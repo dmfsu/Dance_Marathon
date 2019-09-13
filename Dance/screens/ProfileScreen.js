@@ -9,7 +9,7 @@ import BackDropBottom from '../components/BackDropBottom';
 
 //username, position, "points", organization, 
 
-class ProfileScreen extends React.Component {
+export default class ProfileScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
