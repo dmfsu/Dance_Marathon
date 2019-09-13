@@ -4,6 +4,7 @@ import { ExpoConfigView } from '@expo/samples';
 import Avatar from '../components/Avatar';
 import ProfileInfo from '../components/profileInfo';
 
+//username, position, "points", organization, 
 
 class ProfileScreen extends React.Component {
   static navigationOptions = {

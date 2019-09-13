@@ -8,6 +8,8 @@ import {
 // Make each screen a class that extends React.Component, its easier to
 // work with rather than making them functions.
 
+//sign up: first/last name, organization, email(use the same as )
+
 /** This is a JSDoc comment */
 class LoginHome extends React.Component {
   static navigationOptions = {
