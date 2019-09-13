@@ -1,70 +1,68 @@
 import React from 'react';
-import { Platform } from 'react-native';
-import { icons } from 'native-base'
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-
+import {Platform} from 'react-native';
+import {
+  createStackNavigator,
+  createMaterialTopTabNavigator} from 'react-navigation';
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
-
-const HomeStack = createStackNavigator(
-  {
-    Home: HomeScreen,
-  },
+const EventsStack = createStackNavigator(
+    {
+      Events: LinksScreen,
+    },
 );
 
-HomeStack.navigationOptions = {
+EventsStack.navigationOptions = {
   tabBarLabel: 'Events',
-  tabBarIcon: ({ focused }) => (
+  tabBarIcon: ({focused}) => (
     <TabBarIcon
-      focuse = { focused }
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
+      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
     />
   ),
 };
 
-HomeStack.path = '';
-
-const LinksStack = createStackNavigator(
-  {
-    Links: LinksScreen,
-  },
-);
-
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Camera',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-  ),
-};
-
-LinksStack.path = '';
+EventsStack.path = '';
 
 const ProfileStack = createStackNavigator(
-  {
-    Profile: ProfileScreen,
-  },
+    {
+      Profile: ProfileScreen, SettingsScreen,
+    },
 );
 
 ProfileStack.navigationOptions = {
   tabBarLabel: 'Profile',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+  tabBarIcon: ({focused}) => (
+    <TabBarIcon
+      name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} />
   ),
 };
 
 ProfileStack.path = '';
 
-const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
+const tabNavigator = createMaterialTopTabNavigator({
   ProfileStack,
+  EventsStack,
+},
+{
+  tabBarPosition: 'bottom',
+  tabBarOptions: {
+    activeTintColor: 'black',
+    inactiveTintColor: 'grey',
+    showIcon: true,
+    style: {
+      backgroundColor: '#FFFFFF',
+      height: '8%',
+    },
+    indicatorStyle: {
+      height: 0,
+    },
+    labelStyle: {
+      fontSize: 12,
+      fontWeight: 'bold',
+    },
+  },
 });
 
 tabNavigator.path = '';

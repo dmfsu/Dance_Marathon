@@ -78,9 +78,3 @@ const styles = StyleSheet.create({
   },
 });
 
-/* Things to add:
--> Feature to move input so you can see what you type
--> Nicer button
--> May switch to different authentication (Facebook/Google)
--> Guest option
-*/
