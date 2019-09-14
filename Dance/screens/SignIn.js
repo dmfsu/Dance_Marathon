@@ -52,7 +52,7 @@ class LoginHome extends React.Component {
   // This is what authenticates the sign in
   _signInAsync = async () => {
     await AsyncStorage.setItem('userToken', 'abc');
-    this.props.navigation.navigate('Main');
+    this.props.navigation.navigate('Dashboard');
   };
 }
 
