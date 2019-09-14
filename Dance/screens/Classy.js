@@ -3,35 +3,9 @@ import {Icon, Button, Text} from 'native-base';
 import { View, Linking, FlatList} from 'react-native';
 
 class Classy extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: true,
-      username: '',
-      email: '',
-    };
-  }
-
-  componentDidMount = () => {
-      fetch('http://elmango.pythonanywhere.com/users/1/?format=json', {
-         method: 'GET'
-      })
-      .then((response) => response.json())
-      .then((responseJson) => {
-         console.log(responseJson);
-         this.setState({
-            username: responseJson.username,
-            email: responseJson.email,
-         })
-      })
-      .catch((error) => {
-         console.error(error);
-      });
-   }
 
    consoleMessage=()=>{
-    console.log(this.state.username)
-    console.log(this.state.email)
+    console.log('Hello')
    }
 
   render() {
