@@ -11,67 +11,142 @@ const description2 = [
   { title: "More:", content: "Bikes4Tykes is a charity event that helps provide bikes for underpriveleged kids. They collect donations to purchase bicycles and helmets for donation to Toys For Tots and The Salvation Army at Christmas time." }  
 ];
 
-export default function LinksScreen() {
-  return (
-    <ScrollView style={styles.container}>
-      <Container>
-        <Content>
-          <Card style={{ backgroundColor: '#782F40' }}>
-            <CardItem header style={{ backgroundColor: '#782F40' }}>
-              <Left><Text style={{ fontSize: 20, fontFamily: 'SavoyeLetPlain' }}> pewpew</Text></Left>
 
-              <Right>
-                <Image style={{ flex: 1, height: 20, width: 60 }}
-                source={ require('../assets/images/gold_star.jpg')}/>
-                <Text> 50    </Text>
-              </Right>
-            </CardItem>
-            <CardItem style={{ backgroundColor: '#782F40'}}>
-              <Body>
-                  <Image style={styles.pic} source={ require('../assets/images/cardPic.png')}/>
-              </Body>
-            </CardItem>
-            <CardItem footer style={{ backgroundColor: '#CEB888'}}>
-              <Left><Text>Oglesby Union</Text></Left>
-              <Right><Text>9/3 8:00PM - 10:00PM</Text></Right>
-            </CardItem>
-            <CardItem footer style={{ backgroundColor: '#CEB888'}}>
-              <Accordion dataArray={description1}/>
-            </CardItem>
+export default class LinksScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      events: [],
+      loading: true,
+      id: '',
+      name: '',
+      time: '',
+      place: '',
+      points: '',
+      code: '',
+      user_list: '',
+      signedIn: false,
+    };
+  }
+
+componentDidMount = () => {
+      fetch('http://elmango.pythonanywhere.com/events/?format=json', {
+         method: 'GET'
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        if(responseJson.detail != 'Not found.'){
+/*         this.setState({
+            id: responseJson.id,
+            name: responseJson.name,
+            time: responseJson.time,
+            place: responseJson.place,
+            points: responseJson.points,
+            code: responseJson.code,
+      //      user_list: responseJson.user_list,            
+         })*/
+         this.setState({
+          events: responseJson
+         })
+       }
+       else{
+        this.setState({
+          id: '0',
+          name: 'guest',
+          time: 'N/A',
+          place: 'N/A',
+          points: 'N/A',
+          code: '0',
+       //   user_list: 'N/A',
+         })
+       }
+      })
+      .catch((error) => {
+         console.log('Error');
+         this.setState({
+          id: '0',
+          name: 'guest',
+          time: 'N/A',
+          place: 'N/A',
+          points: 'N/A',
+          code: '0',
+       //   user_list: 'N/A'
+         })
+      });
+   }
+
+lapsList() {
+
+    return this.state.events.map((data) => {
+      return (
+        console.log(data.name)
+      )
+    })
+
+}
 
 
-          </Card>
+  render() {
+    return (
+      <ScrollView style={styles.container}>
+        <Container>
+          <Content>
 
-          <Card style={{ backgroundColor: '#782F40' }}>
-            <CardItem header style={{ backgroundColor: '#782F40', fontFamily: 'ChalkboardSELight' }}>
+            {this.lapsList()}
 
-              <Left><Text style={{ fontSize: 18 }}> Bikes 4Tykes</Text></Left>
-              <Right>
-                <Image style={{ flex: 1, height: 20, width: 60 }}
-                source={ require('../assets/images/gold_star.jpg')}/>
-                <Text> 200   </Text>
-              </Right>
-            </CardItem>
-            <CardItem style={{ backgroundColor: '#782F40' }}>
-              <Body>
-                  <Image style={styles.pic} source={ require('../assets/images/bikes.jpg')}/>
-              </Body>
-            </CardItem>
-            <CardItem footer style={{ backgroundColor: '#CEB888'}}>
-              <Left><Text>Landis Green</Text></Left>
-              <Right><Text>9/10 4:00PM - 7:00PM</Text></Right>
-            </CardItem>
-            <CardItem footer style={{ backgroundColor: '#CEB888'}}>
-              <Accordion dataArray={description2}/>
-            </CardItem>
+            <Card style={{ backgroundColor: '#782F40' }}>
+              <CardItem header style={{ backgroundColor: '#782F40' }}>
+                <Left><Text style={{ fontSize: 20, fontFamily: 'SavoyeLetPlain' }}> First GBM</Text></Left>
+                <Right>
+                  <Image style={{ flex: 1, height: 20, width: 60 }}
+                  source={ require('../assets/images/gold_star.jpg')}/>
+                  <Text> 50    </Text>
+                </Right>
+              </CardItem>
+              <CardItem style={{ backgroundColor: '#782F40'}}>
+                <Body>
+                    <Image style={styles.pic} source={ require('../assets/images/cardPic.png')}/>
+                </Body>
+              </CardItem>
+              <CardItem footer style={{ backgroundColor: '#CEB888'}}>
+                <Left><Text>Oglesby Union</Text></Left>
+                <Right><Text>9/3 8:00PM - 10:00PM</Text></Right>
+              </CardItem>
+              <CardItem footer style={{ backgroundColor: '#CEB888'}}>
+                <Accordion dataArray={description1}/>
+              </CardItem>
 
+            </Card>
 
-          </Card>
+            <Card style={{ backgroundColor: '#782F40' }}>
+              <CardItem header style={{ backgroundColor: '#782F40', fontFamily: 'ChalkboardSE-Light' }}>
+                <Left><Text style={{ fontSize: 18 }}> Bikes 4Tykes</Text></Left>
+                <Right>
+                  <Image style={{ flex: 1, height: 20, width: 60 }}
+                  source={ require('../assets/images/gold_star.jpg')}/>
+                  <Text> 200   </Text>
+                </Right>
+              </CardItem>
+              <CardItem style={{ backgroundColor: '#782F40' }}>
+                <Body>
+                    <Image style={styles.pic} source={ require('../assets/images/bikes.jpg')}/>
+                </Body>
+              </CardItem>
+              <CardItem footer style={{ backgroundColor: '#CEB888'}}>
+                <Left><Text>Landis Green</Text></Left>
+                <Right><Text>9/10 4:00PM - 7:00PM</Text></Right>
+              </CardItem>
+              <CardItem footer style={{ backgroundColor: '#CEB888'}}>
+                <Accordion dataArray={description2}/>
+              </CardItem>
 
-        </Content>
-      </Container>
-    </ScrollView>
-  );
+            </Card>
+
+          </Content>
+        </Container>
+      </ScrollView>
+    );
+  }
 }
 
 LinksScreen.navigationOptions = {
