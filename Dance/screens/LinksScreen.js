@@ -8,7 +8,7 @@ const description1 = [
 ];
 
 const description2 = [
-  { title: "More:", content: " is a charity event that helps provide bikes for underpriveleged kids. They collect donations to purchase bicycles and helmets for donation to Toys For Tots and The Salvation Army at Christmas time." }  
+  { title: "More:", content: "Bikes4Tykes is a charity event that helps provide bikes for underpriveleged kids. They collect donations to purchase bicycles and helmets for donation to Toys For Tots and The Salvation Army at Christmas time." }  
 ];
 
 export default function LinksScreen() {
