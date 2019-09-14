@@ -7,6 +7,12 @@ import Info from '../components/profileInfo';
 /** top of the profile page color */
 export default class BackDropTop extends React.Component {
   /** @return {component}*/
+
+  consoleMessage=()=>{
+    console.log(this.props.email)
+   }
+
+
   render() {
     return (
       <View style={styles.backDropTop}>
@@ -14,13 +20,13 @@ export default class BackDropTop extends React.Component {
           <Button iconLeft transparent onPress = {this.props.open}>
             <Icon name='menu' style={{fontSize: 35, color: '#CEB888'}} />
           </Button>
-          <Button iconLeft transparent onPress = {this.props.open}>
+          <Button iconLeft transparent onPress = {this.consoleMessage}>
             <Icon name='settings' style={{fontSize: 35, color: '#CEB888'}} />
           </Button>
         </View>
-        <Text style={styles.text}> Jason Santos </Text>
+        <Text style={styles.text}> {this.props.username} </Text>
         <Avatar />
-        <Info />
+        <Info rank={this.props.rank} points={this.props.points} />
       </View>
     );
   }
