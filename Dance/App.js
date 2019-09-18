@@ -20,6 +20,7 @@ export default function App(props) {
     );
   } else {
     return (
+      getEvents(),
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <AppNavigator />
@@ -46,6 +47,19 @@ async function loadResourcesAsync() {
       ChalkboardSELight: require('./assets/fonts/chalkboard-se-light.ttf'),
     }),
   ]);
+}
+
+async function getEvents(){
+      fetch('http://elmango.pythonanywhere.com/events/?format=json', {
+         method: 'GET'
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
+      })
+      .catch((error) => {
+         console.log('Error');
+      });
 }
 
 function handleLoadingError(error) {
