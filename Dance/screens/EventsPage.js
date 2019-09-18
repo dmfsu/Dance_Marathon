@@ -12,7 +12,7 @@ const description2 = [
 ];
 
 
-export default class LinksScreen extends React.Component {
+export default class EventsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -131,7 +131,7 @@ lapsList() {
   }
 }
 
-LinksScreen.navigationOptions = {
+EventsPage.navigationOptions = {
   title: 'Links',
 };
 

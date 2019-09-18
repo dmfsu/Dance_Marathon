@@ -8,13 +8,13 @@ import LoginHome from '../screens/Login';
 import SignInScreen from '../screens/SignIn';
 import Classy from '../screens/Classy';
 import About from '../screens/About';
-import LinksScreen from '../screens/LinksScreen';
+import EventsPage from '../screens/EventsPage';
 
 const appDrawerNavigator = createDrawerNavigator({
     Home: MainTabNavigator,
     Classy: Classy,
     About: About,
-    Events: LinksScreen,
+    Events: EventsPage,
   },
   {
   	contentOptions: {
