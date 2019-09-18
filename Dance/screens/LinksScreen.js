@@ -100,7 +100,7 @@ lapsList() {
 
             <Card key={data.id}style={{ backgroundColor: '#782F40' }}>
               <CardItem header style={{ backgroundColor: '#782F40' }}>
-                <Left><Text style={{ fontSize: 20, fontFamily: 'SavoyeLetPlain' }}>{data.name}</Text></Left>
+                <Left><Text style={{ fontSize: 20 }}>{data.name}</Text></Left>
                 <Right>
                   <Image style={{ flex: 1, height: 20, width: 60 }}
                   source={ require('../assets/images/gold_star.jpg')}/>
@@ -113,8 +113,8 @@ lapsList() {
                 </Body>
               </CardItem>
               <CardItem footer style={{ backgroundColor: '#CEB888'}}>
-                <Left><Text>Oglesby Union</Text></Left>
-                <Right><Text>9/3 8:00PM - 10:00PM</Text></Right>
+                <Left><Text>{data.place}</Text></Left>
+                <Right><Text>{data.time}</Text></Right>
               </CardItem>
               <CardItem footer style={{ backgroundColor: '#CEB888'}}>
                 <Accordion dataArray={description1}/>
