@@ -6,6 +6,7 @@ import {
   SafeAreaView} from 'react-native';
 import BackDropTop from '../components/BackDropTop';
 import BackDropBottom from '../components/BackDropBottom';
+import BackDropBottomGuest from '../components/BackDropBottomGuest';
 
 //username, position, "points", organization, 
 
@@ -30,7 +31,7 @@ export default class ProfileScreen extends React.Component {
   }
 
   componentDidMount = () => {
-      fetch('http://elmango.pythonanywhere.com/users/3/?format=json', {
+      fetch('http://elmango.pythonanywhere.com/users/5/?format=json', {
          method: 'GET'
       })
       .then((response) => response.json())
@@ -49,7 +50,7 @@ export default class ProfileScreen extends React.Component {
        }
        else{
         this.setState({
-          username: 'guest',
+          username: 'Guest',
           email: 'N/A',
           events: 'N/A',
           organization: 'N/A',
@@ -75,6 +76,20 @@ export default class ProfileScreen extends React.Component {
       });
    }
 
+   decideScreen=()=>{
+    
+      if(this.state.signedIn == true){
+        return (
+            <BackDropBottom />
+          )
+      }
+      else {
+        return (
+            <BackDropBottomGuest signIn= {() => this.props.navigation.navigate('SignIn')} />
+          )
+      }
+   }
+
   /** @return {screen} */
   render() {
     return (
@@ -87,8 +102,7 @@ export default class ProfileScreen extends React.Component {
           signedIn= {this.state.signedIn}
           rank= {this.state.rank}
           points= {this.state.points}/>
-        <BackDropBottom 
-          signedIn= {this.state.signedIn}/>
+        {this.decideScreen()}
       </SafeAreaView>
     );
   }
