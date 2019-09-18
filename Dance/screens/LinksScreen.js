@@ -94,13 +94,17 @@ lapsList() {
 
             {this.lapsList()}
 
-            <Card style={{ backgroundColor: '#782F40' }}>
+            {this.state.events.map((data) => (
+
+
+
+            <Card key={data.id}style={{ backgroundColor: '#782F40' }}>
               <CardItem header style={{ backgroundColor: '#782F40' }}>
-                <Left><Text style={{ fontSize: 20, fontFamily: 'SavoyeLetPlain' }}> First GBM</Text></Left>
+                <Left><Text style={{ fontSize: 20, fontFamily: 'SavoyeLetPlain' }}>{data.name}</Text></Left>
                 <Right>
                   <Image style={{ flex: 1, height: 20, width: 60 }}
                   source={ require('../assets/images/gold_star.jpg')}/>
-                  <Text> 50    </Text>
+                  <Text> {data.points}    </Text>
                 </Right>
               </CardItem>
               <CardItem style={{ backgroundColor: '#782F40'}}>
@@ -118,30 +122,8 @@ lapsList() {
 
             </Card>
 
-            <Card style={{ backgroundColor: '#782F40' }}>
-              <CardItem header style={{ backgroundColor: '#782F40', fontFamily: 'ChalkboardSELight' }}>
-                <Left><Text style={{ fontSize: 18 }}> Bikes 4Tykes</Text></Left>
-                <Right>
-                  <Image style={{ flex: 1, height: 20, width: 60 }}
-                  source={ require('../assets/images/gold_star.jpg')}/>
-                  <Text> 200   </Text>
-                </Right>
-              </CardItem>
-              <CardItem style={{ backgroundColor: '#782F40' }}>
-                <Body>
-                    <Image style={styles.pic} source={ require('../assets/images/bikes.jpg')}/>
-                </Body>
-              </CardItem>
-              <CardItem footer style={{ backgroundColor: '#CEB888'}}>
-                <Left><Text>Landis Green</Text></Left>
-                <Right><Text>9/10 4:00PM - 7:00PM</Text></Right>
-              </CardItem>
-              <CardItem footer style={{ backgroundColor: '#CEB888'}}>
-                <Accordion dataArray={description2}/>
-              </CardItem>
-
-            </Card>
-
+          ))}
+          
           </Content>
         </Container>
       </ScrollView>
