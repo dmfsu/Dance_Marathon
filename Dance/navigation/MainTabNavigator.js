@@ -4,13 +4,13 @@ import {
   createStackNavigator,
   createMaterialTopTabNavigator} from 'react-navigation';
 import TabBarIcon from '../components/TabBarIcon';
-import LinksScreen from '../screens/LinksScreen';
+import EventsPage from '../screens/EventsPage';
 import ProfileScreen from '../screens/ProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const EventsStack = createStackNavigator(
     {
-      Events: LinksScreen,
+      Events: EventsPage,
     },
 );
 
