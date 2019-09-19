@@ -8,6 +8,7 @@ import EventsPage from '../screens/EventsPage';
 import ProfileScreen from '../screens/ProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
+
 const EventsStack = createStackNavigator(
     {
       Events: EventsPage,

@@ -8,77 +8,25 @@ import BackDropTop from '../components/BackDropTop';
 import BackDropBottom from '../components/BackDropBottom';
 import BackDropBottomGuest from '../components/BackDropBottomGuest';
 
-//username, position, "points", organization, 
+//Class rather than a function to make use of state variables
 
 export default class ProfileScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: true,
-      username: '',
-      email: '',
-      events: '',
-      organization: '',
-      points: '',
-      id: '',
-      rank: '',
+  
+  //The only state variable is Signed in to tell which screen to display
+  constructor(props){
+    super(props)
+    this.state ={
       signedIn: false,
-    };
+    }
   }
 
-  componentDidMount = () => {
-      fetch('http://elmango.pythonanywhere.com/users/5/?format=json', {
-         method: 'GET'
-      })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        if(responseJson.detail != 'Not found.'){
-         this.setState({
-            username: responseJson.username,
-            email: responseJson.email,
-            events: responseJson.events,
-            organization: responseJson.organization,
-            points: responseJson.points,
-            id: responseJson,
-            rank: 'Member',
-            signedIn: true,
-         })
-       }
-       else{
-        this.setState({
-          username: 'Guest',
-          email: 'N/A',
-          events: 'N/A',
-          organization: 'N/A',
-          points: '0',
-          id: '0',
-          rank: 'Member',
-          signedIn: false,
-         })
-       }
-      })
-      .catch((error) => {
-         console.log('Error');
-         this.setState({
-          username: 'guest',
-          email: 'N/A',
-          events: 'N/A',
-          organization: 'N/A',
-          points: '0',
-          id: '0',
-          rank: 'Member',
-          signedIn: false,
-         })
-      });
-   }
-
-   decideScreen=()=>{
-    
-      if(this.state.signedIn == true){
+  //Changes the look of the profile screen depending on if the user
+  //is signed in or not
+  decideScreen(){
+      if(this.state.signedIn === true){
         return (
             <BackDropBottom />
           )
@@ -92,23 +40,37 @@ export default class ProfileScreen extends React.Component {
 
   /** @return {screen} */
   render() {
+
+    //All of the variables I am getting from the sign in page, passed
+    //as params. These are not state variables. 
+    const username= this.props.navigation.getParam('name', 'Guest');
+    const email= this.props.navigation.getParam('email', 'N/A');
+    const events= this.props.navigation.getParam('events', 'None');
+    const organization= this.props.navigation.getParam('organization', 'None');
+    const points= this.props.navigation.getParam('points', '0');
+    const id= this.props.navigation.getParam('id', '0');
+    const rank= this.props.navigation.getParam('rank', 'Guest');
+    const signedIn= this.props.navigation.getParam('signedIn', false);
+
+    //Returns what is shown on the screen
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
         <View style={styles.androidBar}></View>
         <BackDropTop 
           open= {() => this.props.navigation.openDrawer()} 
-          username= {this.state.username}
-          email={this.state.email}
-          signedIn= {this.state.signedIn}
-          rank= {this.state.rank}
-          points= {this.state.points}/>
+          username= {username}
+          email={email}
+          rank= {rank}
+          points= {points}/>
         {this.decideScreen()}
       </SafeAreaView>
     );
   }
 }
 
+
 const styles = StyleSheet.create({
+  //Style for the android bar, needs work
   androidBar: {
     height: Platform.OS === 'ios'? 0:39,
     backgroundColor: '#782F40',
