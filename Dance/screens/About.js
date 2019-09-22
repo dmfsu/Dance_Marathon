@@ -12,7 +12,7 @@ class About extends React.Component {
         </Button>
       </View>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 300 }}>
-        <Text> About me page </Text>
+        <Text> This is about me </Text>
       </View>  
     </View>
     );
