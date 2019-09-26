@@ -3,12 +3,8 @@ import { ScrollView, Image, StyleSheet } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Left, Right, Button, Body, Icon, Accordion} from 'native-base';
 import { ExpoLinksView } from '@expo/samples';
 
-const description1 = [
-  { title: "More:", content: "First General Body Meeting to go over basic details of Dance Marathon this semester, upcoming events, and more." }
-];
-
-const description2 = [
-  { title: "More:", content: "Bikes4Tykes is a charity event that helps provide bikes for underpriveleged kids. They collect donations to purchase bicycles and helmets for donation to Toys For Tots and The Salvation Army at Christmas time." }  
+const description1 =[
+            { title: "More:", content: "blah" }
 ];
 
 
@@ -73,7 +69,7 @@ componentDidMount = () => {
        //   user_list: 'N/A'
          })
       });
-   }
+  }
 
 lapsList() {
 
@@ -93,7 +89,6 @@ lapsList() {
           <Content>
 
             {this.lapsList()}
-
             {this.state.events.map((data) => (
 
 
@@ -119,7 +114,11 @@ lapsList() {
               <CardItem footer style={{ backgroundColor: '#CEB888'}}>
                 <Accordion dataArray={description1}/>
               </CardItem>
-
+              <CardItem style={{ backgroundColor: '#cEB888' }}>
+                <Button full dark style={{ width: '100%', backgroundColor: '#782F40' }}>
+                  <Text>Check In</Text>
+                </Button>
+              </CardItem>
             </Card>
 
           ))}
@@ -132,7 +131,7 @@ lapsList() {
 }
 
 EventsPage.navigationOptions = {
-  title: 'Links',
+  title: 'Events',
 };
 
 const styles = StyleSheet.create({
