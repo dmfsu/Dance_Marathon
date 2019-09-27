@@ -1,6 +1,6 @@
 import React from 'react';
-import { ScrollView, Image, StyleSheet } from 'react-native';
-import { Container, Header, Content, Card, CardItem, Text, Left, Right, Button, Body, Icon, Accordion} from 'native-base';
+import { Modal, ScrollView, Image, StyleSheet } from 'react-native';
+import { Container, Header, Content, Card, CardItem, Text, Left, Right, Button, Body, Icon, Accordion, Input, Item} from 'native-base';
 import { ExpoLinksView } from '@expo/samples';
 
 const description1 =[
@@ -22,7 +22,13 @@ export default class EventsPage extends React.Component {
       code: '',
       user_list: '',
       signedIn: false,
+      modalState: false
     };
+  }
+
+
+  setMyModalState(){
+    this.setState({modalState: true});
   }
 
 componentDidMount = () => {
@@ -91,38 +97,42 @@ lapsList() {
             {this.lapsList()}
             {this.state.events.map((data) => (
 
-
-
-            <Card key={data.id}style={{ backgroundColor: '#782F40' }}>
-              <CardItem header style={{ backgroundColor: '#782F40' }}>
-                <Left><Text style={{ fontSize: 20 }}>{data.name}</Text></Left>
-                <Right>
-                  <Image style={{ flex: 1, height: 20, width: 60 }}
-                  source={ require('../assets/images/gold_star.jpg')}/>
-                  <Text> {data.points}    </Text>
-                </Right>
-              </CardItem>
-              <CardItem style={{ backgroundColor: '#782F40'}}>
-                <Body>
-                    <Image style={styles.pic} source={ require('../assets/images/cardPic.png')}/>
-                </Body>
-              </CardItem>
-              <CardItem footer style={{ backgroundColor: '#CEB888'}}>
-                <Left><Text>{data.place}</Text></Left>
-                <Right><Text>{data.time}</Text></Right>
-              </CardItem>
-              <CardItem footer style={{ backgroundColor: '#CEB888'}}>
-                <Accordion dataArray={description1}/>
-              </CardItem>
-              <CardItem style={{ backgroundColor: '#cEB888' }}>
-                <Button full dark style={{ width: '100%', backgroundColor: '#782F40' }}>
-                  <Text>Check In</Text>
-                </Button>
-              </CardItem>
-            </Card>
+              <Card key={data.id}style={{ backgroundColor: '#782F40' }}>
+                <CardItem header style={{ backgroundColor: '#782F40' }}>
+                  <Left><Text style={{ fontSize: 20 }}>{data.name}</Text></Left>
+                  <Right>
+                    <Image style={{ flex: 1, height: 20, width: 60 }}
+                    source={ require('../assets/images/gold_star.jpg')}/>
+                    <Text> {data.points}    </Text>
+                  </Right>
+                </CardItem>
+                <CardItem style={{ backgroundColor: '#782F40'}}>
+                  <Body>
+                      <Image style={styles.pic} source={ require('../assets/images/cardPic.png')}/>
+                  </Body>
+                </CardItem>
+                <CardItem footer style={{ backgroundColor: '#CEB888'}}>
+                  <Left><Text>{data.place}</Text></Left>
+                  <Right><Text>{data.time}</Text></Right>
+                </CardItem>
+                <CardItem footer style={{ backgroundColor: '#CEB888'}}>
+                  <Accordion dataArray={description1}/>
+                </CardItem>
+                <CardItem style={{ backgroundColor: '#cEB888' }}>
+                  <Item rounded style={{ backgroundColor: '#000000' }}>
+                    <Input placeholder='Regular Textbox' />
+                  </Item>
+                </CardItem>
+                <CardItem style={{ backgroundColor: '#cEB888' }}>
+                    <Button full dark style={{ width: '100%', backgroundColor: '#782F40' }} 
+                              onPress={() => console.log("button press!")}>
+                      <Text>Check In</Text>
+                  </Button>
+                </CardItem>
+              </Card>
+              //onPress={() => this.setMyModalState(true)}>
 
           ))}
-          
           </Content>
         </Container>
       </ScrollView>
