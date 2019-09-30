@@ -81,7 +81,7 @@ lapsList() {
 
     return this.state.events.map((data) => {
       return (
-        console.log(data.name)
+        console.log('worked')
       )
     })
 
