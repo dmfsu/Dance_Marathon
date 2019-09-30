@@ -7,6 +7,7 @@ import {
 import BackDropTop from '../components/BackDropTop';
 import BackDropBottom from '../components/BackDropBottom';
 import BackDropBottomGuest from '../components/BackDropBottomGuest';
+import * as SecureStore from 'expo-secure-store';
 
 //Class rather than a function to make use of state variables
 
@@ -38,12 +39,14 @@ export default class ProfileScreen extends React.Component {
       }
    }
 
+   
+
   /** @return {screen} */
   render() {
 
     //All of the variables I am getting from the sign in page, passed
     //as params. These are not state variables. 
-    const username= this.props.navigation.getParam('name', 'Guest');
+    const username= SecureStore.getItemAsync('name');
     const email= this.props.navigation.getParam('email', 'N/A');
     const events= this.props.navigation.getParam('events', 'None');
     const organization= this.props.navigation.getParam('organization', 'None');
@@ -58,10 +61,11 @@ export default class ProfileScreen extends React.Component {
         <View style={styles.androidBar}></View>
         <BackDropTop 
           open= {() => this.props.navigation.openDrawer()} 
-          username= {username}
+          username= {'jason'}
           email={email}
           rank= {rank}
           points= {points}/>
+          {console.log(username)}
         {this.decideScreen()}
       </SafeAreaView>
     );

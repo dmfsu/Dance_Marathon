@@ -2,6 +2,7 @@ import React from 'react';
 import {Icon, Button, Text} from 'native-base';
 import { View, Linking } from 'react-native';
 
+
 class About extends React.Component {
   render() {
     return (

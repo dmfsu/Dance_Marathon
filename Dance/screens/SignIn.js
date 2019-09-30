@@ -1,5 +1,5 @@
 import React from 'react';
-import {AsyncStorage, View, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import {
   Button,
   Text,
@@ -8,6 +8,7 @@ import {
   Input,
   Label,
 } from 'native-base';
+import * as SecureStore from 'expo-secure-store';
 
 // Make each screen a class that extends React.Component, its easier to
 // work with rather than making them functions.
@@ -64,7 +65,7 @@ export default class LoginHome extends React.Component {
   // This is what authenticates the sign in
   _signInAsync = async () => {
 
-    await AsyncStorage.setItem('userToken', 'abc');
+    SecureStore.setItemAsync(name, '6ix9ine')
     this.props.navigation.navigate('Profile', {
       name: this.state.name,
       email: this.state.email,

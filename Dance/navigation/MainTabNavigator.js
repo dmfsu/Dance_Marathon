@@ -43,8 +43,8 @@ ProfileStack.navigationOptions = {
 ProfileStack.path = '';
 
 const tabNavigator = createMaterialTopTabNavigator({
-  ProfileStack,
   EventsStack,
+  ProfileStack,
 },
 {
   tabBarPosition: 'bottom',
