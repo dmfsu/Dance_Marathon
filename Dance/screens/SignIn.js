@@ -65,7 +65,7 @@ export default class LoginHome extends React.Component {
   // This is what authenticates the sign in
   _signInAsync = async () => {
 
-    SecureStore.setItemAsync(name, '6ix9ine')
+    SecureStore.setItemAsync('name', '6ix9ine')
     this.props.navigation.navigate('Profile', {
       name: this.state.name,
       email: this.state.email,
