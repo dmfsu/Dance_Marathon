@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Platform,
+  AsyncStorage,
   View,
   StyleSheet,
   SafeAreaView} from 'react-native';
@@ -20,12 +21,40 @@ export default class ProfileScreen extends React.Component {
   constructor(props){
     super(props)
     this.state ={
-      signedIn: false,
+      signedIn: null,
     }
   }
 
   //Changes the look of the profile screen depending on if the user
   //is signed in or not
+  componentDidMount(){
+    this._retrieveData()
+  }
+
+  _retrieveData = async () => {
+    let value = '';
+  try {
+    value = await AsyncStorage.getItem('signedIn');
+    if (value !== null) {
+      if(value !== 'false'){
+        this.setState({signedIn: true});
+      }
+      else{
+        this.setState({signedIn: false})
+      }
+    }
+  } catch (error) {
+    // Error retrieving data
+    console.log('nothing');
+  }
+};
+
+  showGuest(){
+    return(
+        <BackDropBottomGuest signIn= {() => this.props.navigation.navigate('SignIn')} />
+      )
+  }
+
   decideScreen(){
       if(this.state.signedIn === true){
         return (
@@ -39,21 +68,17 @@ export default class ProfileScreen extends React.Component {
       }
    }
 
-   
 
   /** @return {screen} */
   render() {
 
     //All of the variables I am getting from the sign in page, passed
     //as params. These are not state variables. 
-    const username= SecureStore.getItemAsync('name');
     const email= this.props.navigation.getParam('email', 'N/A');
     const events= this.props.navigation.getParam('events', 'None');
     const organization= this.props.navigation.getParam('organization', 'None');
     const points= this.props.navigation.getParam('points', '0');
     const id= this.props.navigation.getParam('id', '0');
-    const rank= this.props.navigation.getParam('rank', 'Guest');
-    const signedIn= this.props.navigation.getParam('signedIn', false);
 
     //Returns what is shown on the screen
     return (
@@ -63,10 +88,9 @@ export default class ProfileScreen extends React.Component {
           open= {() => this.props.navigation.openDrawer()} 
           username= {'jason'}
           email={email}
-          rank= {rank}
+          rank= {this.props.navigation.getParam('rank', 'Guest')}
           points= {points}/>
-          {console.log(username)}
-        {this.decideScreen()}
+          {this.decideScreen()}
       </SafeAreaView>
     );
   }
