@@ -5,7 +5,9 @@ import {View, StyleSheet, AsyncStorage} from 'react-native';
 /** top of the profile page color */
 export default class BackDropBottom extends React.Component {
 
-
+  leave(){
+    this.props.signOutNav;
+  }
 
   /** @return {component}*/
   render() {
@@ -14,7 +16,7 @@ export default class BackDropBottom extends React.Component {
         <View style={styles.button}>
           <Button large block light rounded 
           style={{backgroundColor: '#782F40'}}
-          onPress={this._signOut}>
+          onPress={this.props.signOutNav}>
             <Text style={{color: 'white'}}> Sign Out </Text>
           </Button>
         </View>  
@@ -26,6 +28,7 @@ export default class BackDropBottom extends React.Component {
     try {
       await AsyncStorage.removeItem('signedIn');
       await AsyncStorage.setItem('signedIn', 'false');
+      this.props.signOutNav;
     } catch (error) {
       console.log('Couldnt sign out')
     }

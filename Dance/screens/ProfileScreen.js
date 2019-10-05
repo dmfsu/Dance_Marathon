@@ -58,7 +58,7 @@ export default class ProfileScreen extends React.Component {
   decideScreen(){
       if(this.state.signedIn === true){
         return (
-            <BackDropBottom />
+            <BackDropBottom signOutNav = {() => this.props.navigation.navigate('Loading')} />
           )
       }
       else {
