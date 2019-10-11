@@ -17,7 +17,7 @@ class Classy extends React.Component {
         </Button>
       </View>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 300 }}>
-        <Button iconLeft transparent onPress={()=>{ Linking.openURL('https://www.classy.org/')}}>
+        <Button iconLeft transparent onPress={()=>{ Linking.openURL('https://donate.giving.ufhealth.org/campaign/dance-marathon-at-florida-state-university-2020/c231597')}}>
           <Text> Classy Link </Text>
         </Button>
         <Button iconLeft transparent onPress={this.consoleMessage}>

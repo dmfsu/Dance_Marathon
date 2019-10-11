@@ -1,5 +1,5 @@
 import React from 'react';
-import {AsyncStorage, View, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, AsyncStorage, Image} from 'react-native';
 import {
   Button,
   Text,
@@ -12,13 +12,25 @@ import {
 // Make each screen a class that extends React.Component, its easier to
 // work with rather than making them functions.
 
-/** This is a JSDoc comment */
-class LoginHome extends React.Component {
+export default class LoginHome extends React.Component {
   static navigationOptions = {
     header: null,
   };
 
-  /** @return {screen} */
+  constructor(props){
+    super(props)
+    this.state ={
+      name: 'bobert',
+      rank: 'Cap',
+      email: 'None',
+      id: '0',
+      organization: 'None',
+      points: '0',
+      username: '',
+      password: '',
+    }
+  }
+
   render() {
     return (
       <View style={styles.mainView}>
@@ -51,14 +63,20 @@ class LoginHome extends React.Component {
 
   // This is what authenticates the sign in
   _signInAsync = async () => {
-    await AsyncStorage.setItem('userToken', 'abc');
-    this.props.navigation.navigate('Dashboard');
-  };
+  try {
+    await AsyncStorage.setItem('signedIn', 'true');
+    this.props.navigation.navigate('Profile', {
+      email: this.state.email,
+      id: this.state.id,
+      rank: this.state.rank,
+      points: this.state.points
+    });
+  } catch (error) {
+    console.log('Data was not saved')
+  }
+};
+
 }
-
-// End of Code basically
-
-export default LoginHome;
 
 const styles = StyleSheet.create({
   pic: {
