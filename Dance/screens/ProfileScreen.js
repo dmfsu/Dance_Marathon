@@ -34,14 +34,12 @@ export default class ProfileScreen extends React.Component {
   _retrieveData = async () => {
     let value = '';
   try {
-    value = await AsyncStorage.getItem('signedIn');
-    if (value !== null) {
-      if(value !== 'false'){
-        this.setState({signedIn: true});
-      }
-      else{
+    value = await AsyncStorage.getItem('AuthKey');
+    if (value !== '0') {
+        this.setState({signedIn: true})
+    }
+    else{
         this.setState({signedIn: false})
-      }
     }
   } catch (error) {
     // Error retrieving data
@@ -58,7 +56,7 @@ export default class ProfileScreen extends React.Component {
   decideScreen(){
       if(this.state.signedIn === true){
         return (
-            <BackDropBottom />
+            <BackDropBottom signOutNav = {() => this.props.navigation.navigate('Loading')} />
           )
       }
       else {
@@ -82,6 +80,7 @@ export default class ProfileScreen extends React.Component {
 
     //Returns what is shown on the screen
     return (
+      this._retrieveData(),
       <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
         <View style={styles.androidBar}></View>
         <BackDropTop 
