@@ -23,16 +23,6 @@ export default class BackDropBottom extends React.Component {
       </View>
     );
   }
-
-     _signOut = async () => {
-    try {
-      await AsyncStorage.removeItem('signedIn');
-      await AsyncStorage.setItem('signedIn', 'false');
-      this.props.signOutNav;
-    } catch (error) {
-      console.log('Couldnt sign out')
-    }
-  };
 }
 
 

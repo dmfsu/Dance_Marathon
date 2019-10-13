@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {View, StyleSheet, AsyncStorage, Image} from 'react-native';
 import {
   Button,
@@ -20,14 +21,9 @@ export default class LoginHome extends React.Component {
   constructor(props){
     super(props)
     this.state ={
-      name: 'bobert',
-      rank: 'Cap',
-      email: 'None',
-      id: '0',
-      organization: 'None',
-      points: '0',
-      username: '',
-      password: '',
+     Username: '',
+     Password: '',
+     AKey: '',
     }
   }
 
@@ -38,13 +34,16 @@ export default class LoginHome extends React.Component {
           <Form>
             <Item stackedLabel>
               <Label style={{color: 'white', paddingBottom: 10}}>Username</Label>
-              <Input style={{color: 'white', fontSize: 20}} />
+              <Input 
+                style={{color: 'white', fontSize: 20}}
+                onChangeText={(text) => this.setState({Username: text})}/>
             </Item>
             <Item stackedLabel>
               <Label style={{color: 'white'}}>Password</Label>
               <Input
                 secureTextEntry= {true}
                 style={{color: 'white', fontSize: 20}}
+                onChangeText={(text) => this.setState({Password: text})}
               />
             </Item>
           </Form>
@@ -61,18 +60,37 @@ export default class LoginHome extends React.Component {
     );
   }
 
-  // This is what authenticates the sign in
   _signInAsync = async () => {
   try {
-    await AsyncStorage.setItem('signedIn', 'true');
-    this.props.navigation.navigate('Profile', {
-      email: this.state.email,
-      id: this.state.id,
-      rank: this.state.rank,
-      points: this.state.points
+    //***********************
+      axios.post('http://elmango.pythonanywhere.com/rest-auth/login/', {
+      email: 'lucas@gmail.us',
+      password: 'puppies123'
+    })
+    .then(async function (response) {
+          try{
+            await AsyncStorage.setItem('AuthKey', response.data.key)
+          }catch(error){
+            console.log("Key Error");
+          }   
+    })
+    .catch(function (error) {
+      console.log("Sorry, this user doesn't exist!");
     });
+  //*******************************
+
+    try {
+      value = await AsyncStorage.getItem('AuthKey');
+      if(value !== '0'){
+        this.props.navigation.navigate('SigningIn');
+      }
+    } catch (error) {
+      // Error retrieving data
+      console.log('nothing');
+    }
+
   } catch (error) {
-    console.log('Data was not saved')
+    console.log('Could not sign in')
   }
 };
 

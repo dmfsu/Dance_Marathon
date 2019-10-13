@@ -12,7 +12,7 @@ import {
 //sign up: first/last name, organization, email(use the same as )
 
 /** This is a JSDoc comment */
-class SigningOut extends React.Component {
+class SigningIn extends React.Component {
   static navigationOptions = {
     header: null,
   };
@@ -20,19 +20,10 @@ class SigningOut extends React.Component {
 
   componentDidMount(){
     setTimeout( () => {
-        this._signOut();
         this.props.navigation.navigate('Dashboard');
     }, 800 );
-}
-
-  _signOut = async () => {
-    try {
-      await AsyncStorage.setItem('AuthKey', '0');
-
-    } catch (error) {
-      console.log('Couldnt sign out')
-    }
   }
+
 
   /** @return {screen} */
   render() {
@@ -42,7 +33,6 @@ class SigningOut extends React.Component {
           <Image style={styles.pic}
             source={ require('../assets/images/white.png')}
           />
-          <Text> Signing Out, please be patiet </Text>
         </View>
       </View>
     );
@@ -51,7 +41,7 @@ class SigningOut extends React.Component {
 
 // End of Code basically
 
-export default SigningOut;
+export default SigningIn;
 
 const styles = StyleSheet.create({
   pic: {
