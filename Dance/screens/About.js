@@ -18,6 +18,7 @@ class About extends React.Component {
           <Icon name='settings' style={{fontSize: 35, color: '#CEB888'}} />
         </Button>
         <Text> About me page </Text>
+
       </View>  
     </View>
     );
