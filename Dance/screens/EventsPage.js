@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, ScrollView, Image, StyleSheet } from 'react-native';
+import { View, Modal, ScrollView, Image, StyleSheet, TextInput } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Left, Right, Button, Body, Icon, Accordion, Input, Item} from 'native-base';
 import { ExpoLinksView } from '@expo/samples';
 
@@ -22,14 +22,12 @@ export default class EventsPage extends React.Component {
       code: '',
       user_list: '',
       signedIn: false,
-      modalState: false
+      modalVisible: false,
+      codeEntered: ''
     };
+
   }
 
-
-  setMyModalState(){
-    this.setState({modalState: true});
-  }
 
 componentDidMount = () => {
       fetch('http://elmango.pythonanywhere.com/events/?format=json', {
@@ -77,6 +75,8 @@ componentDidMount = () => {
       });
   }
 
+
+
 lapsList() {
 
     return this.state.events.map((data) => {
@@ -86,6 +86,15 @@ lapsList() {
     })
 
 }
+
+  openModal(){
+    	this.setState({modalVisible:true});
+  }
+
+  closeModal(){
+  		console.log(this.state.codeEntered);
+    	this.setState({modalVisible:false});
+  }
 
 
   render() {
@@ -119,18 +128,39 @@ lapsList() {
                   <Accordion dataArray={description1}/>
                 </CardItem>
                 <CardItem style={{ backgroundColor: '#cEB888' }}>
-                  <Item rounded style={{ backgroundColor: '#000000' }}>
-                    <Input placeholder='Regular Textbox' />
-                  </Item>
-                </CardItem>
-                <CardItem style={{ backgroundColor: '#cEB888' }}>
                     <Button full dark style={{ width: '100%', backgroundColor: '#782F40' }} 
-                              onPress={() => console.log("button press!")}>
+                              onPress={() => this.openModal()}>
                       <Text>Check In</Text>
                   </Button>
                 </CardItem>
+                
+	                <View style={styles.container}>
+		         		 <Modal
+		              visible={this.state.modalVisible}
+		              animationType={'slide'}
+		              onRequestClose={() => this.closeModal()}
+		         		 >
+		            <View style={styles.modalContainer}>
+		              <View style={styles.innerContainer}>
+		                  <TextInput style={{ height: 40, width: '90%', borderWidth: 2, backgroundColor: '#FFFFFF' }}
+		                  	placeholder="Enter Code"
+		                  	placeholderTextColor = "#000000"
+		                  	onChangeText={(codeEntered) => this.setState({codeEntered})}/>
+		                  <Button style={{ backgroundColor: '#000000' }}
+		                  	onPress={() => {this.closeModal(); 
+		                  			if((this.state.codeEntered) == data.code){
+		                  				console.log("Code MATCHED*****")
+		                  			}
+		                  			else{
+		                  				console.log("Code NOT Matched*****")
+		                  			}
+		                  	}}><Text>Submit</Text></Button>
+		            	  </View>
+		        	    </View>
+		        	  </Modal>
+		       		 </View>
+
               </Card>
-              //onPress={() => this.setMyModalState(true)}>
 
           ))}
           </Content>
@@ -150,4 +180,13 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     backgroundColor: '#fff',
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#CEB888',
+  },
+  innerContainer: {
+    alignItems: 'center',
+  },
+
 });
