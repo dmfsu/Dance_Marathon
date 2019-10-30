@@ -60,15 +60,17 @@ export default class LoginHome extends React.Component {
     );
   }
 
+
   _signInAsync = async () => {
   var props = this.props;
   try {
     //***********************
-      axios.post('http://elmango.pythonanywhere.com/rest-auth/login/', {
-      email: 'lucas@gmail.us',
-      password: 'puppies123'
+			axios.post('http://elmango.pythonanywhere.com/rest-auth/login/', {
+			email: 'lucas@gmail.us',
+			password: 'puppies123',
     })
     .then(async function (response) {
+<<<<<<< Updated upstream
           try{
             if(response.data.key !== '0'){
               await AsyncStorage.setItem('AuthKey', response.data.key);
@@ -76,14 +78,39 @@ export default class LoginHome extends React.Component {
           }catch(error){
             console.log("Key Error");
           }   
+=======
+		try{
+			console.log("Right Before AsyncStorage")
+			await AsyncStorage.setItem('AuthKey', response.data.key)
+		}catch(error){
+			console.log("Key Error");
+		}   
+>>>>>>> Stashed changes
     })
     .then(function (){
       props.navigation.navigate("SigningIn");
     })
     .catch(function (error) {
-      console.log("Sorry, this user doesn't exist!");
+		console.log("Sorry, this user doesn't exist!");
     });
+<<<<<<< Updated upstream
   //*******************************
+=======
+  	//*******************************
+
+    try {
+      console.log("Set Value to AuthKey")
+      value = await AsyncStorage.getItem('AuthKey');
+      console.log("Authkey = " + value)
+      if(value !== '0'){
+        this.props.navigation.navigate('SigningIn');
+      }
+    } catch (error) {
+      // Error retrieving data
+      console.log('nothing');
+    }
+
+>>>>>>> Stashed changes
   } catch (error) {
     console.log('Could not sign in')
   }

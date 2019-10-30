@@ -80,9 +80,6 @@ componentDidMount = () => {
 lapsList() {
 
     return this.state.events.map((data) => {
-      return (
-        console.log('worked')
-      )
     })
 
 }

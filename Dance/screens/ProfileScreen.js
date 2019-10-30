@@ -85,10 +85,7 @@ export default class ProfileScreen extends React.Component {
         <View style={styles.androidBar}></View>
         <BackDropTop 
           open= {() => this.props.navigation.openDrawer()} 
-          username= {'jason'}
-          email={email}
-          rank= {this.props.navigation.getParam('rank', 'Guest')}
-          points= {points}/>
+          username= {'jason'}/>
           {this.decideScreen()}
       </SafeAreaView>
     );
