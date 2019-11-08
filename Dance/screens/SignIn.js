@@ -62,61 +62,20 @@ export default class LoginHome extends React.Component {
 
 
   _signInAsync = async () => {
-  var props = this.props;
-  try {
-    //***********************
-			axios.post('http://elmango.pythonanywhere.com/rest-auth/login/', {
-			email: 'lucas@gmail.us',
-			password: 'puppies123',
-    })
+    var props = this.props;
+      axios.post('http://elmango.pythonanywhere.com/rest-auth/login/', {
+      email: 'lucas@gmail.us',
+      password: 'puppies123',
+      })
     .then(async function (response) {
-<<<<<<< Updated upstream
-          try{
-            if(response.data.key !== '0'){
-              await AsyncStorage.setItem('AuthKey', response.data.key);
-            }
-          }catch(error){
-            console.log("Key Error");
-          }   
-=======
-		try{
-			console.log("Right Before AsyncStorage")
-			await AsyncStorage.setItem('AuthKey', response.data.key)
-		}catch(error){
-			console.log("Key Error");
-		}   
->>>>>>> Stashed changes
+      await AsyncStorage.setItem("id", 2);
     })
-    .then(function (){
-      props.navigation.navigate("SigningIn");
-    })
-    .catch(function (error) {
-		console.log("Sorry, this user doesn't exist!");
-    });
-<<<<<<< Updated upstream
-  //*******************************
-=======
-  	//*******************************
-
-    try {
-      console.log("Set Value to AuthKey")
-      value = await AsyncStorage.getItem('AuthKey');
-      console.log("Authkey = " + value)
-      if(value !== '0'){
-        this.props.navigation.navigate('SigningIn');
-      }
-    } catch (error) {
-      // Error retrieving data
-      console.log('nothing');
-    }
-
->>>>>>> Stashed changes
-  } catch (error) {
-    console.log('Could not sign in')
+    .catch(function () {
+     console.log("Promise Rejected");})
   }
-};
+} 
 
-}
+
 
 const styles = StyleSheet.create({
   pic: {
