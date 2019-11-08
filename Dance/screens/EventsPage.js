@@ -36,7 +36,7 @@ componentDidMount = () => {
       .then((response) => response.json())
       .then((responseJson) => {
         if(responseJson.detail != 'Not found.'){
-    /*      this.setState({
+/*         this.setState({
             id: responseJson.id,
             name: responseJson.name,
             time: responseJson.time,
@@ -76,25 +76,18 @@ componentDidMount = () => {
   }
 
 
-
-lapsList() {
-
-    return this.state.events.map((data) => {
-      return (
-        console.log('worked')
-      )
-    })
-
-}
-
-  openModal(){
-    	this.setState({modalVisible:true});
+  openModal(d){
+    	this.setState({modalVisible:true, checkCode:d});
   }
 
   closeModal(){
   		console.log(this.state.codeEntered);
     	this.setState({modalVisible:false});
   }
+
+changeText(x){
+	this.setState({codeEntered:x});
+}
 
 
   render() {
@@ -103,7 +96,6 @@ lapsList() {
         <Container>
           <Content>
 
-            {this.lapsList()}
             {this.state.events.map((data) => (
 
               <Card key={data.id}style={{ backgroundColor: '#782F40' }}>
@@ -129,7 +121,7 @@ lapsList() {
                 </CardItem>
                 <CardItem style={{ backgroundColor: '#cEB888' }}>
                     <Button full dark style={{ width: '100%', backgroundColor: '#782F40' }} 
-                              onPress={() => this.openModal()}>
+                              onPress={() => this.openModal(data.code)}>
                       <Text>Check In</Text>
                   </Button>
                 </CardItem>
@@ -145,16 +137,22 @@ lapsList() {
 		                  <TextInput style={{ height: 40, width: '90%', borderWidth: 2, backgroundColor: '#FFFFFF' }}
 		                  	placeholder="Enter Code"
 		                  	placeholderTextColor = "#000000"
-		                  	onChangeText={(codeEntered) => this.setState({codeEntered})}/>
-		                  <Button style={{ backgroundColor: '#000000' }}
+		                  	onChangeText={(codeEntered) => this.changeText(codeEntered)}/>
+		                  <Button style={{ backgroundColor: '#782F40', top:10 }}
 		                  	onPress={() => {this.closeModal(); 
-		                  			if((this.state.codeEntered) == data.code){
+		                  				console.log("Data code: " + data.code)
+		                  				console.log("Code entered: " + this.state.codeEntered)
+		                  			if((this.state.codeEntered) === this.state.checkCode){
 		                  				console.log("Code MATCHED*****")
 		                  			}
 		                  			else{
 		                  				console.log("Code NOT Matched*****")
 		                  			}
 		                  	}}><Text>Submit</Text></Button>
+		                  		<Button style={{ backgroundColor: '#782F40', top:250,left:1,right:1 }}
+		              				onPress = {() => this.closeModal()}>
+		              				<Text>Back</Text>
+				        </Button>
 		            	  </View>
 		        	    </View>
 		        	  </Modal>
