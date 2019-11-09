@@ -76,9 +76,9 @@ componentDidMount = () => {
   }
 
 
-  openModal(d){
-    	this.setState({modalVisible:true, checkCode:d});
-  }
+
+    return this.state.events.map((data) => {
+    })
 
   closeModal(){
   		console.log(this.state.codeEntered);

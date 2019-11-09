@@ -49,7 +49,7 @@ export default class LoginHome extends React.Component {
           </Form>
         </View>
         <View style={styles.buttonView}>
-          <Button large block light rounded onPress={this._signInAsync}>
+          <Button large block light rounded onPress={() => this._signInAsync(this.props)}>
             <Text
               style={{color: 'black', fontWeight: 'bold', fontSize: 15}}>
               Sign in
@@ -60,41 +60,22 @@ export default class LoginHome extends React.Component {
     );
   }
 
+
   _signInAsync = async () => {
-  try {
-    //***********************
+    var props = this.props;
       axios.post('http://elmango.pythonanywhere.com/rest-auth/login/', {
       email: 'lucas@gmail.us',
-      password: 'puppies123'
-    })
+      password: 'puppies123',
+      })
     .then(async function (response) {
-          try{
-            await AsyncStorage.setItem('AuthKey', response.data.key)
-          }catch(error){
-            console.log("Key Error");
-          }   
+      await AsyncStorage.setItem("id", 2);
     })
-    .catch(function (error) {
-      console.log("Sorry, this user doesn't exist!");
-    });
-  //*******************************
-
-    try {
-      value = await AsyncStorage.getItem('AuthKey');
-      if(value !== '0'){
-        this.props.navigation.navigate('SigningIn');
-      }
-    } catch (error) {
-      // Error retrieving data
-      console.log('nothing');
-    }
-
-  } catch (error) {
-    console.log('Could not sign in')
+    .catch(function () {
+     console.log("Promise Rejected");})
   }
-};
+} 
 
-}
+
 
 const styles = StyleSheet.create({
   pic: {

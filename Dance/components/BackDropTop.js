@@ -8,11 +8,6 @@ import Info from '../components/profileInfo';
 export default class BackDropTop extends React.Component {
   /** @return {component}*/
 
-  consoleMessage=()=>{
-    console.log(this.props.email)
-   }
-
-
   render() {
     return (
       <View style={styles.backDropTop}>
@@ -24,9 +19,8 @@ export default class BackDropTop extends React.Component {
             <Icon name='settings' style={{fontSize: 35, color: '#CEB888'}} />
           </Button>
         </View>
-        <Text style={styles.text}> {this.props.username} </Text>
         <Avatar />
-        <Info rank={this.props.rank} points={this.props.points} />
+        <Text style={styles.text}> {this.props.username} </Text>
       </View>
     );
   }
