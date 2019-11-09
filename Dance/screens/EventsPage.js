@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Modal, ScrollView, Image, StyleSheet, TextInput } from 'react-native';
+import { AsyncStorage, View, Modal, ScrollView, Image, StyleSheet, TextInput } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Left, Right, Button, Body, Icon, Accordion, Input, Item} from 'native-base';
 import { ExpoLinksView } from '@expo/samples';
 
@@ -89,6 +89,15 @@ changeText(x){
 	this.setState({codeEntered:x});
 }
 
+const getUserId = async () => {
+  let id = '';
+  try {
+    id = await AsyncStorage.getItem('id') || 'none';
+  } catch (error) {
+    // Error retrieving data
+    console.log(error.message);
+  }  return id;
+}
 
   render() {
     return (
