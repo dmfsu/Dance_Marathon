@@ -17,6 +17,7 @@ export default class ProfileScreen extends React.Component {
     header: null,
   };
   
+
   //The only state variable is Signed in to tell which screen to display
   constructor(props){
     super(props)
@@ -46,6 +47,7 @@ export default class ProfileScreen extends React.Component {
     console.log('nothing');
   }
 };
+
 
   showGuest(){
     return(
@@ -80,15 +82,11 @@ export default class ProfileScreen extends React.Component {
 
     //Returns what is shown on the screen
     return (
-      this._retrieveData(),
       <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
         <View style={styles.androidBar}></View>
         <BackDropTop 
           open= {() => this.props.navigation.openDrawer()} 
-          username= {'jason'}
-          email={email}
-          rank= {this.props.navigation.getParam('rank', 'Guest')}
-          points= {points}/>
+          username= {'jason'}/>
           {this.decideScreen()}
       </SafeAreaView>
     );
