@@ -75,11 +75,6 @@ componentDidMount = () => {
       });
   }
 
-
-
-    return this.state.events.map((data) => {
-    })
-
   closeModal(){
   		console.log(this.state.codeEntered);
     	this.setState({modalVisible:false});

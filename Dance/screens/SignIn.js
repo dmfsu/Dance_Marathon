@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {View, StyleSheet, AsyncStorage, Image} from 'react-native';
+import {View, Alert, StyleSheet, AsyncStorage, Image} from 'react-native';
 import {
   Button,
   Text,
@@ -10,8 +10,9 @@ import {
   Label,
 } from 'native-base';
 
-// Make each screen a class that extends React.Component, its easier to
-// work with rather than making them functions.
+/* The LoginHome is where the user will sign in. Upon a successful
+sign in, they are sent to a loading screen at "SigningIn.js" to reload
+the profile component. */
 
 export default class LoginHome extends React.Component {
   static navigationOptions = {
@@ -23,7 +24,6 @@ export default class LoginHome extends React.Component {
     this.state ={
      Username: '',
      Password: '',
-     AKey: '',
     }
   }
 
@@ -49,7 +49,7 @@ export default class LoginHome extends React.Component {
           </Form>
         </View>
         <View style={styles.buttonView}>
-          <Button large block light rounded onPress={() => this._signInAsync(this.props)}>
+          <Button large block light rounded onPress={() => this._signInAsync()}>
             <Text
               style={{color: 'black', fontWeight: 'bold', fontSize: 15}}>
               Sign in
@@ -62,16 +62,36 @@ export default class LoginHome extends React.Component {
 
 
   _signInAsync = async () => {
-    var props = this.props;
+      var props = this.props;
+      
+      /* Try to sign in the user. If the username or pass word doesnt work,
+      then output an alert message saying to try again  */
+      
+
       axios.post('http://elmango.pythonanywhere.com/rest-auth/login/', {
-      email: 'lucas@gmail.us',
-      password: 'puppies123',
+        email: this.state.Username , 
+        password: this.state.Password,
       })
-    .then(async function (response) {
-      await AsyncStorage.setItem("id", 2);
-    })
-    .catch(function () {
-     console.log("Promise Rejected");})
+      .then(async function (response) {
+        try {
+        /* Store variables foe whole app */
+          await AsyncStorage.setItem('id', JSON.stringify(response.data.user.id));
+          await AsyncStorage.setItem('email', JSON.stringify(response.data.user.email));
+          await AsyncStorage.setItem('username', JSON.stringify(response.data.user.username));
+        }catch{
+          console.log("Error Storing data")
+        }
+        props.navigation.navigate('SigningIn');
+      })
+      .catch(function () {
+        /* Alert the user if Sign in did not work */
+        Alert.alert(
+          'Couldn\'t Sign In',
+          'The email or password you entered is invalid. Please try again. (or don\'t, I don\'t care)',
+          [ {text: 'OK'} ],
+          {cancelable: false},
+        );
+      })
   }
 } 
 
