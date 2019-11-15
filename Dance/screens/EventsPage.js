@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, ScrollView, Image, StyleSheet } from 'react-native';
+import { AsyncStorage, View, Modal, ScrollView, Image, StyleSheet, TextInput } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Left, Right, Button, Body, Icon, Accordion, Input, Item} from 'native-base';
 import { ExpoLinksView } from '@expo/samples';
 
@@ -22,14 +22,12 @@ export default class EventsPage extends React.Component {
       code: '',
       user_list: '',
       signedIn: false,
-      modalState: false
+      modalVisible: false,
+      codeEntered: ''
     };
+
   }
 
-
-  setMyModalState(){
-    this.setState({modalState: true});
-  }
 
 componentDidMount = () => {
       fetch('http://elmango.pythonanywhere.com/events/?format=json', {
@@ -38,7 +36,7 @@ componentDidMount = () => {
       .then((response) => response.json())
       .then((responseJson) => {
         if(responseJson.detail != 'Not found.'){
-    /*      this.setState({
+/*         this.setState({
             id: responseJson.id,
             name: responseJson.name,
             time: responseJson.time,
@@ -77,16 +75,29 @@ componentDidMount = () => {
       });
   }
 
-lapsList() {
 
-    return this.state.events.map((data) => {
-      return (
-        console.log('worked')
-      )
-    })
+  openModal(d){
+    	this.setState({modalVisible:true, checkCode:d});
+  }
 
+  closeModal(){
+  		console.log(this.state.codeEntered);
+    	this.setState({modalVisible:false});
+  }
+
+changeText(x){
+	this.setState({codeEntered:x});
 }
 
+const getUserId = async () => {
+  let id = '';
+  try {
+    id = await AsyncStorage.getItem('id') || 'none';
+  } catch (error) {
+    // Error retrieving data
+    console.log(error.message);
+  }  return id;
+}
 
   render() {
     return (
@@ -94,7 +105,6 @@ lapsList() {
         <Container>
           <Content>
 
-            {this.lapsList()}
             {this.state.events.map((data) => (
 
               <Card key={data.id}style={{ backgroundColor: '#782F40' }}>
@@ -119,18 +129,45 @@ lapsList() {
                   <Accordion dataArray={description1}/>
                 </CardItem>
                 <CardItem style={{ backgroundColor: '#cEB888' }}>
-                  <Item rounded style={{ backgroundColor: '#000000' }}>
-                    <Input placeholder='Regular Textbox' />
-                  </Item>
-                </CardItem>
-                <CardItem style={{ backgroundColor: '#cEB888' }}>
                     <Button full dark style={{ width: '100%', backgroundColor: '#782F40' }} 
-                              onPress={() => console.log("button press!")}>
+                              onPress={() => this.openModal(data.code)}>
                       <Text>Check In</Text>
                   </Button>
                 </CardItem>
+                
+	                <View style={styles.container}>
+		         		 <Modal
+		              visible={this.state.modalVisible}
+		              animationType={'slide'}
+		              onRequestClose={() => this.closeModal()}
+		         		 >
+		            <View style={styles.modalContainer}>
+		              <View style={styles.innerContainer}>
+		                  <TextInput style={{ height: 40, width: '90%', borderWidth: 2, backgroundColor: '#FFFFFF' }}
+		                  	placeholder="Enter Code"
+		                  	placeholderTextColor = "#000000"
+		                  	onChangeText={(codeEntered) => this.changeText(codeEntered)}/>
+		                  <Button style={{ backgroundColor: '#782F40', top:10 }}
+		                  	onPress={() => {this.closeModal(); 
+		                  				console.log("Data code: " + data.code)
+		                  				console.log("Code entered: " + this.state.codeEntered)
+		                  			if((this.state.codeEntered) === this.state.checkCode){
+		                  				console.log("Code MATCHED*****")
+		                  			}
+		                  			else{
+		                  				console.log("Code NOT Matched*****")
+		                  			}
+		                  	}}><Text>Submit</Text></Button>
+		                  		<Button style={{ backgroundColor: '#782F40', top:250,left:1,right:1 }}
+		              				onPress = {() => this.closeModal()}>
+		              				<Text>Back</Text>
+				        </Button>
+		            	  </View>
+		        	    </View>
+		        	  </Modal>
+		       		 </View>
+
               </Card>
-              //onPress={() => this.setMyModalState(true)}>
 
           ))}
           </Content>
@@ -150,4 +187,13 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     backgroundColor: '#fff',
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#CEB888',
+  },
+  innerContainer: {
+    alignItems: 'center',
+  },
+
 });
