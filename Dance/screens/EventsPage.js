@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { Alert, AsyncStorage, View, Modal, ScrollView, Image, StyleSheet, TextInput } from 'react-native';
+
 import { Container, Header, Content, Card, CardItem, Text, Left, Right, Button, Body, Icon, Accordion, Input, Item} from 'native-base';
 import { ExpoLinksView } from '@expo/samples';
 
@@ -75,6 +77,7 @@ componentDidMount = () => {
       });
   }
 
+
   openModal(d){
     if(this.state.signedIn == true){
       this.setState({modalVisible:true, checkCode:d});
@@ -93,6 +96,7 @@ changeText(x){
 	this.setState({codeEntered:x});
 }
 
+
   getUserID = async () => {
     try {
       let userID = await AsyncStorage.getItem('id')
@@ -107,6 +111,7 @@ changeText(x){
       console.log(error)
     }
   }
+
 
 
   render() {
