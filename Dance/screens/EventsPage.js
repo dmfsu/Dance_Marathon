@@ -89,16 +89,6 @@ changeText(x){
 	this.setState({codeEntered:x});
 }
 
-const getUserId = async () => {
-  let id = '';
-  try {
-    id = await AsyncStorage.getItem('id') || 'none';
-  } catch (error) {
-    // Error retrieving data
-    console.log(error.message);
-  }  return id;
-}
-
   render() {
     return (
       <ScrollView style={styles.container}>
