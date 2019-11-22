@@ -27,7 +27,8 @@ class SigningOut extends React.Component {
 
   _signOut = async () => {
     try {
-      await AsyncStorage.setItem('id', '0');
+      await AsyncStorage.setItem('id', '-69')
+      await AsyncStorage.setItem('AuthKey', '0');
 
     } catch (error) {
       console.log('Couldnt sign out')
@@ -40,7 +41,7 @@ class SigningOut extends React.Component {
       <View style={styles.mainView}>
         <View style={styles.logoView}>
           <Image style={styles.pic}
-            source={ require('../assets/images/white.png')}
+            source={ require('../../assets/images/white.png')}
           />
           <Text> Signing Out, please be patiet </Text>
         </View>

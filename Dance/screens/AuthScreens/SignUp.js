@@ -14,7 +14,7 @@ import {
 sign in, they are sent to a loading screen at "SigningIn.js" to reload
 the profile component. */
 
-export default class LoginHome extends React.Component {
+export default class SignUp extends React.Component {
   static navigationOptions = {
     header: null,
   };
@@ -24,6 +24,9 @@ export default class LoginHome extends React.Component {
     this.state ={
      Username: '',
      Password: '',
+     Password2: '',
+     Email: '',
+     Organization: '',
     }
   }
 
@@ -39,6 +42,18 @@ export default class LoginHome extends React.Component {
                 onChangeText={(text) => this.setState({Username: text})}/>
             </Item>
             <Item stackedLabel>
+              <Label style={{color: 'white', paddingBottom: 10}}>Email</Label>
+              <Input 
+                style={{color: 'white', fontSize: 20}}
+                onChangeText={(text) => this.setState({Email: text})}/>
+            </Item>
+            <Item stackedLabel>
+              <Label style={{color: 'white', paddingBottom: 10}}>Organization</Label>
+              <Input 
+                style={{color: 'white', fontSize: 20}}
+                onChangeText={(text) => this.setState({Organization: text})}/>
+            </Item>
+            <Item stackedLabel>
               <Label style={{color: 'white'}}>Password</Label>
               <Input
                 secureTextEntry= {true}
@@ -46,13 +61,21 @@ export default class LoginHome extends React.Component {
                 onChangeText={(text) => this.setState({Password: text})}
               />
             </Item>
+            <Item stackedLabel>
+              <Label style={{color: 'white'}}>Re-enter Password</Label>
+              <Input
+                secureTextEntry= {true}
+                style={{color: 'white', fontSize: 20}}
+                onChangeText={(text) => this.setState({Password2: text})}
+              />
+            </Item>
           </Form>
         </View>
         <View style={styles.buttonView}>
-          <Button large block light rounded onPress={() => this._signInAsync()}>
+          <Button large block light rounded onPress={() => this._signUpAsync()}>
             <Text
               style={{color: 'black', fontWeight: 'bold', fontSize: 15}}>
-              Sign in
+              Sign Up
             </Text>
           </Button>
         </View>
@@ -61,33 +84,27 @@ export default class LoginHome extends React.Component {
   }
 
 
-  _signInAsync = async () => {
+  _signUpAsync = async () => {
       var props = this.props;
       
       /* Try to sign in the user. If the username or pass word doesnt work,
       then output an alert message saying to try again  */
       
-
-      axios.post('http://elmango.pythonanywhere.com/rest-auth/login/', {
-        email: this.state.Username , 
-        password: this.state.Password,
-      })
-      .then(async function (response) {
-        try {
-        /* Store variables foe whole app */
-          await AsyncStorage.setItem('id', JSON.stringify(response.data.user.id));
-          await AsyncStorage.setItem('email', JSON.stringify(response.data.user.email));
-          await AsyncStorage.setItem('username', JSON.stringify(response.data.user.username));
-        }catch{
-          console.log("Error Storing data")
-        }
-        props.navigation.navigate('SigningIn');
+      axios.post('http://elmango.pythonanywhere.com/rest-auth/registration/', {
+		    "username": this.state.Username,
+		    "email": this.state.Email,
+		    "password1": this.state.Password,
+		    "password2": this.state.Password2,
+		    "organization": this.state.Organization,
+		})
+      .then(function (response) {
+      	props.navigation.navigate('SignIn');
       })
       .catch(function () {
         /* Alert the user if Sign in did not work */
         Alert.alert(
-          'Couldn\'t Sign In',
-          'The email or password you entered is invalid. Please try again. (or don\'t, I don\'t care)',
+          'Couldn\'t Create User',
+          'Please try another password',
           [ {text: 'OK'} ],
           {cancelable: false},
         );
@@ -113,7 +130,7 @@ const styles = StyleSheet.create({
     marginRight: '15%',
   },
   mainView: {
-    backgroundColor: '#782F40',
+    backgroundColor: '#CEB888',
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',

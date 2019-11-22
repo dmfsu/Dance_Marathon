@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Modal, ScrollView, Image, StyleSheet, TextInput } from 'react-native';
+import { Alert, AsyncStorage, View, Modal, ScrollView, Image, StyleSheet, TextInput } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Left, Right, Button, Body, Icon, Accordion, Input, Item} from 'native-base';
 import { ExpoLinksView } from '@expo/samples';
 
@@ -13,7 +13,7 @@ export default class EventsPage extends React.Component {
     super(props);
     this.state = {
       events: [],
-      loading: true,
+      loading: true,  
       id: '',
       name: '',
       time: '',
@@ -75,6 +75,15 @@ componentDidMount = () => {
       });
   }
 
+  openModal(d){
+    if(this.state.signedIn == true){
+      this.setState({modalVisible:true, checkCode:d});
+    }
+    else{
+      Alert.alert("Guests can not check into events. Please sign in")
+    }
+  }
+
   closeModal(){
   		console.log(this.state.codeEntered);
     	this.setState({modalVisible:false});
@@ -83,6 +92,21 @@ componentDidMount = () => {
 changeText(x){
 	this.setState({codeEntered:x});
 }
+
+  getUserID = async () => {
+    try {
+      let userID = await AsyncStorage.getItem('id')
+      console.log("Successful Check In!")
+      console.log(userID)
+      if(userID != '-69'){
+        this.setState({
+          signedIn: true
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
 
   render() {
@@ -135,13 +159,15 @@ changeText(x){
 		                  	onChangeText={(codeEntered) => this.changeText(codeEntered)}/>
 		                  <Button style={{ backgroundColor: '#782F40', top:10 }}
 		                  	onPress={() => {this.closeModal(); 
-		                  				console.log("Data code: " + data.code)
 		                  				console.log("Code entered: " + this.state.codeEntered)
 		                  			if((this.state.codeEntered) === this.state.checkCode){
+                              //updatePoints();
+                              this.getUserID()
 		                  				console.log("Code MATCHED*****")
 		                  			}
 		                  			else{
 		                  				console.log("Code NOT Matched*****")
+                              //error()
 		                  			}
 		                  	}}><Text>Submit</Text></Button>
 		                  		<Button style={{ backgroundColor: '#782F40', top:250,left:1,right:1 }}

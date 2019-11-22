@@ -1,6 +1,5 @@
 import React from 'react';
 import {AsyncStorage, View, Image, StyleSheet} from 'react-native';
-import { NavigationActions } from 'react-navigation';
 import {
   Button,
   Text,
@@ -12,18 +11,10 @@ import {
 //sign up: first/last name, organization, email(use the same as )
 
 /** This is a JSDoc comment */
-class SigningIn extends React.Component {
+class LoginHome extends React.Component {
   static navigationOptions = {
     header: null,
   };
-
-
-  componentDidMount(){
-    setTimeout( () => {
-        this.props.navigation.navigate('Dashboard');
-    }, 800 );
-  }
-
 
   /** @return {screen} */
   render() {
@@ -31,17 +22,42 @@ class SigningIn extends React.Component {
       <View style={styles.mainView}>
         <View style={styles.logoView}>
           <Image style={styles.pic}
-            source={ require('../assets/images/white.png')}
+            source={ require('../../assets/images/white.png')}
           />
+        </View>
+        <View style={styles.buttonView}>
+          <Button large block light rounded onPress={this._signInAsync}>
+            <Text
+              style={{color: 'black', fontWeight: 'bold', fontSize: 15}}>
+              Sign in
+            </Text>
+          </Button>
+          <Button large block light rounded onPress={this._signUpAsync}>
+            <Text
+              style={{color: 'black', fontWeight: 'bold', fontSize: 15}}>
+              Sign Up
+            </Text>
+          </Button>
         </View>
       </View>
     );
   }
+
+  // This is what authenticates the sign in
+  _signInAsync = async () => {
+    await AsyncStorage.setItem('userToken', 'abc');
+    this.props.navigation.navigate('SignIn');
+  };
+
+ _signUpAsync = async () => {
+    await AsyncStorage.setItem('userToken', 'abc');
+    this.props.navigation.navigate('SignUp');
+  };
 }
 
 // End of Code basically
 
-export default SigningIn;
+export default LoginHome;
 
 const styles = StyleSheet.create({
   pic: {
