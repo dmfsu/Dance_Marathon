@@ -4,8 +4,8 @@ import {
 } from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import MainTabNavigator from './MainTabNavigator';
-import LoginHome from '../screens/Login';
-import SignInScreen from '../screens/SignIn';
+import LoginHome from '../screens/AuthScreens/Login';
+import SignInScreen from '../screens/AuthScreens/SignIn';
 import Classy from '../screens/Classy';
 import About from '../screens/About';
 import EventsPage from '../screens/EventsPage';
