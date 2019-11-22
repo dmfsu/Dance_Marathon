@@ -14,7 +14,8 @@ export default class BackDropBottomGuest extends React.Component {
           onPress={this.props.signIn}>
             <Text style={{color: 'white'}}> Sign In </Text>
           </Button>
-          <Button large block light rounded style={{backgroundColor: '#782F40'}}>
+          <Button large block light rounded style={{backgroundColor: '#782F40'}}
+          onPress={this.props.signUp}>
             <Text style={{color: 'white'}}> Sign Up </Text>
           </Button>
         </View>  

@@ -44,14 +44,15 @@ export default class ProfileScreen extends React.Component {
     }
   } catch (error) {
     // Error retrieving data
-    console.log('nothing');
+    console.log('Couldn\'t read AuthKey');
   }
 };
 
 
   showGuest(){
     return(
-        <BackDropBottomGuest signIn= {() => this.props.navigation.navigate('SignIn')} />
+        <BackDropBottomGuest signIn= {() => this.props.navigation.navigate('SignIn')} 
+        signUp= {() => this.props.navigation.navigate('SignUp')} />
       )
   }
 
@@ -63,31 +64,22 @@ export default class ProfileScreen extends React.Component {
       }
       else {
         return (
-            <BackDropBottomGuest signIn= {() => this.props.navigation.navigate('SignIn')} />
+            <BackDropBottomGuest signIn= {() => this.props.navigation.navigate('SignIn')} 
+            signUp= {() => this.props.navigation.navigate('SignUp')}/>
           )
       }
    }
 
 
-  /** @return {screen} */
   render() {
-
-    //All of the variables I am getting from the sign in page, passed
-    //as params. These are not state variables. 
-    const email= this.props.navigation.getParam('email', 'N/A');
-    const events= this.props.navigation.getParam('events', 'None');
-    const organization= this.props.navigation.getParam('organization', 'None');
-    const points= this.props.navigation.getParam('points', '0');
-    const id= this.props.navigation.getParam('id', '0');
-
     //Returns what is shown on the screen
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
         <View style={styles.androidBar}></View>
         <BackDropTop 
           open= {() => this.props.navigation.openDrawer()} 
-          username= {'jason'}/>
-          {this.decideScreen()}
+          username= {'jason'}/>        
+        {this.decideScreen()}
       </SafeAreaView>
     );
   }
