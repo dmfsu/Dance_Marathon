@@ -80,6 +80,7 @@ export default class SignInScreen extends React.Component {
           await AsyncStorage.setItem('id', JSON.stringify(response.data.user.id));
           await AsyncStorage.setItem('email', JSON.stringify(response.data.user.email));
           await AsyncStorage.setItem('username', JSON.stringify(response.data.user.username));
+          await AsyncStorage.setItem('points', JSON.stringify(response.data.user.points));
         }catch{
           console.log("Error Storing data")
         }

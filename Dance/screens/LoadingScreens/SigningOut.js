@@ -27,7 +27,7 @@ class SigningOut extends React.Component {
 
   _signOut = async () => {
     try {
-      await AsyncStorage.setItem('id', '-69')
+     // await AsyncStorage.setItem('id', '-1')
       await AsyncStorage.setItem('AuthKey', '0');
 
     } catch (error) {

@@ -1,0 +1,7 @@
+expo-cli install --global
+npm install
+npm install react-navigation
+rm -rf node_modules/
+npm i
+react-native start --reset-cache
+yarn

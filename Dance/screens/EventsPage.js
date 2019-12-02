@@ -77,10 +77,31 @@ componentDidMount = () => {
       });
   }
 
+  getUserID = async (d) => {
+   try {
+     let userID = await AsyncStorage.getItem('id')
+     let userPoints = await AsyncStorage.getItem('points');
 
-  openModal(d){
+     this.setState({ id: userID })
+     this.setState({ points: userPoints })
+
+     if(userID != '-1'){
+       this.setState({
+         signedIn: true
+       })
+     }
+   } 
+   catch (error) {
+     console.log(error)
+   }
+   
+   this.openModal(d)
+ 
+ }
+
+  openModal = async(e) => {
     if(this.state.signedIn == true){
-      this.setState({modalVisible:true, checkCode:d});
+      this.setState({modalVisible:true, checkCode: e});
     }
     else{
       Alert.alert("Guests can not check into events. Please sign in")
@@ -92,25 +113,16 @@ componentDidMount = () => {
     	this.setState({modalVisible:false});
   }
 
+
 changeText(x){
 	this.setState({codeEntered:x});
 }
 
-  getUserID = async () => {
-    try {
-      let userID = await AsyncStorage.getItem('id')
-      console.log("Successful Check In!")
-      console.log(userID)
-      if(userID != '-69'){
-        this.setState({
-          signedIn: true
-        })
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
+addPoints(pointsToAdd){
+  let totalPoints = +this.state.points + +pointsToAdd
+  console.log("addPoints function, total Points:")
+  console.log(totalPoints)
+}
 
 
   render() {
@@ -144,7 +156,7 @@ changeText(x){
                 </CardItem>
                 <CardItem style={{ backgroundColor: '#cEB888' }}>
                     <Button full dark style={{ width: '100%', backgroundColor: '#782F40' }} 
-                              onPress={() => this.openModal(data.code)}>
+                              onPress={() => this.getUserID(data.code) }>
                       <Text>Check In</Text>
                   </Button>
                 </CardItem>
@@ -163,14 +175,12 @@ changeText(x){
 		                  	onChangeText={(codeEntered) => this.changeText(codeEntered)}/>
 		                  <Button style={{ backgroundColor: '#782F40', top:10 }}
 		                  	onPress={() => {this.closeModal(); 
-		                  				console.log("Code entered: " + this.state.codeEntered)
 		                  			if((this.state.codeEntered) === this.state.checkCode){
                               //updatePoints();
-                              this.getUserID()
-		                  				console.log("Code MATCHED*****")
+                              console.log("Success")
+                              this.addPoints(data.points)
 		                  			}
 		                  			else{
-		                  				console.log("Code NOT Matched*****")
                               //error()
 		                  			}
 		                  	}}><Text>Submit</Text></Button>
