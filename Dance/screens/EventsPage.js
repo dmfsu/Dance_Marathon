@@ -27,6 +27,7 @@ export default class EventsPage extends React.Component {
       modalVisible: false,
       buttonToggle: true,
       FLAG: 0,
+      flagEVENT: -1,
       codeEntered: ''
     };
 
@@ -145,6 +146,11 @@ toggleStatus(){
   console.log("Button toggle is now: " + this.state.buttonToggle)
 }
 
+changeFlagEvent(val){
+  this.setState({ flagEVENT: val })
+  console.log("FROM IN FUNCTION" + val)
+}
+
 
   render() {
     return (
@@ -152,7 +158,6 @@ toggleStatus(){
         <Container>
           <Content>
             {this.state.events.map((data) => (
-
               <Card key={data.id}style={{ backgroundColor: '#782F40' }}>
                 <CardItem header style={{ backgroundColor: '#782F40' }}>
                   <Left><Text style={{ fontSize: 20 }}>{data.name}</Text></Left>
@@ -175,10 +180,18 @@ toggleStatus(){
                   <Accordion dataArray={description1}/>
                 </CardItem>
                 <CardItem style={{ backgroundColor: '#cEB888' }}>
+                  {!this.state.buttonToggle && this.state.flagEVENT == (data.id) ? (
+                      <Button full dark style={{ width: '100%', backgroundColor: '#000000' }}>
+                      <Text>Successful Check In</Text>
+                    </Button>                 
+                  ) : (
                     <Button full dark style={{ width: '100%', backgroundColor: '#782F40' }} 
-                              onPress={() => this.getUserID(data.code) }>
-                      <Text>Check In</Text>
-                  </Button>
+                                onPress={() => this.getUserID(data.code) }>
+                        <Text>Check In {data.id}</Text>
+                      </Button>  
+                  )}
+
+
                 </CardItem>
                 
 	                <View style={styles.container}>
@@ -195,15 +208,15 @@ toggleStatus(){
 		                  	onChangeText={(codeEntered) => this.changeText(codeEntered)}/>
 		                  <Button style={{ backgroundColor: '#782F40', top:10 }}
 		                  	onPress={() => {this.closeModal(); 
-                          
 		                  			if((this.state.codeEntered) === this.state.checkCode){
                               //updatePoints();
-                              this.state.FLAG = 1;
+                              this.changeFlagEvent(data.id)
                               this.toggleStatus();
-                              this.addPoints(data.points)
+                              this.addPoints(data.points);
+                              console.log("flagEvent: " + this.state.flagEvent)
+                              console.log("id " + data.id)
 		                  			}
 		                  			else{
-                              this.state.FLAG = -1;
                               //error()
 		                  			}
 
