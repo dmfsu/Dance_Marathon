@@ -23,6 +23,7 @@ export default class ProfileScreen extends React.Component {
     super(props)
     this.state ={
       signedIn: null,
+      username: 'Guest'
     }
   }
 
@@ -37,7 +38,10 @@ export default class ProfileScreen extends React.Component {
   try {
     value = await AsyncStorage.getItem('AuthKey');
     if (value !== '0') {
-        this.setState({signedIn: true})
+        this.setState({
+          signedIn: true,
+          username: await AsyncStorage.getItem('username')
+        })
     }
     else{
         this.setState({signedIn: false})
@@ -78,7 +82,7 @@ export default class ProfileScreen extends React.Component {
         <View style={styles.androidBar}></View>
         <BackDropTop 
           open= {() => this.props.navigation.openDrawer()} 
-          username= {'jason'}/>        
+          username = {this.state.username}/>        
         {this.decideScreen()}
       </SafeAreaView>
     );

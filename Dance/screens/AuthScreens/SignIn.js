@@ -55,6 +55,12 @@ export default class SignInScreen extends React.Component {
               Sign in
             </Text>
           </Button>
+          <Button large block light rounded onPress={() => this.props.navigation.navigate('Dashboard')}>
+            <Text
+              style={{color: 'black', fontWeight: 'bold', fontSize: 15}}>
+              Back
+            </Text>
+          </Button>
         </View>
       </View>
     );
@@ -69,8 +75,8 @@ export default class SignInScreen extends React.Component {
       
 
       axios.post('http://elmango.pythonanywhere.com/rest-auth/login/', {
-        email: 'myemail@gmail.com', //this.state.Username , 
-        password: '123jason'//this.state.Password,
+        email: this.state.Username , 
+        password: this.state.Password,
       })
       .then(async function (response) {
         try {
@@ -81,6 +87,7 @@ export default class SignInScreen extends React.Component {
           await AsyncStorage.setItem('email', JSON.stringify(response.data.user.email));
           await AsyncStorage.setItem('username', JSON.stringify(response.data.user.username));
           await AsyncStorage.setItem('points', JSON.stringify(response.data.user.points));
+          await AsyncStorage.setItem('organization', JSON.stringify(response.data.user.organization));
         }catch{
           console.log("Error Storing data")
         }
@@ -90,7 +97,7 @@ export default class SignInScreen extends React.Component {
         /* Alert the user if Sign in did not work */
         Alert.alert(
           'Couldn\'t Sign In',
-          'The email or password you entered is invalid. Please try again. (or don\'t, I don\'t care)',
+          'The email or password you entered is invalid. Please try again.',
           [ {text: 'OK'} ],
           {cancelable: false},
         );

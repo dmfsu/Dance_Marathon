@@ -4,9 +4,30 @@ import {View, StyleSheet, ScrollView, AsyncStorage} from 'react-native';
 
 /** top of the profile page color */
 export default class BackDropBottom extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      organization: '',
+      points: '',
+    };
+
+  }
 
   leave(){
     this.props.signOutNav;
+  }
+
+  _getData = async () => {
+    try {
+      this.setState({
+        name: await AsyncStorage.getItem('username'),
+        organization:  await AsyncStorage.getItem('organization'), 
+        points:  await AsyncStorage.getItem('points'),
+      })
+    } catch (error) {
+      console.log('Couldnt sign out')
+    }
   }
 
   /** @return {component}*/
@@ -32,7 +53,7 @@ export default class BackDropBottom extends React.Component {
                    Organization: 
                 </Text>
                 <Text style={styles.data}>
-                  Boomer
+                  {this.state.organization}
                 </Text>
               </View>
               <View style={styles.cardBody}>
@@ -40,7 +61,7 @@ export default class BackDropBottom extends React.Component {
                    Points: 
                 </Text>
                 <Text style={styles.data}>
-                  420
+                  {this.state.points}
                 </Text>
               </View>
               <View style={styles.cardBody}>
@@ -56,7 +77,7 @@ export default class BackDropBottom extends React.Component {
           </Card>
           <Card>
             <CardItem header style={{alignSelf: 'center'}}>
-              <Text style={styles.header}>Group</Text>
+              <Text style={styles.header}>Group Stats</Text>
             </CardItem>
             <CardItem>
               <Body>
@@ -65,7 +86,7 @@ export default class BackDropBottom extends React.Component {
                    Organization: 
                 </Text>
                 <Text style={styles.data}>
-                  Boomer
+                  {this.state.organization}
                 </Text>
               </View>
               <View style={styles.cardBody}>

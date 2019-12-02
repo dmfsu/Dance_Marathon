@@ -5,18 +5,15 @@ import { View, Linking, FlatList, StyleSheet} from 'react-native';
 class Classy extends React.Component {
   render() {
     return (
-      <View style={{backgroundColor: '#CEB888'}}>
+      <View style={{flex: 1, backgroundColor: '#CEB888'}}>
         <View style={styles.buttonView}>
           <Button iconLeft transparent onPress = {() => this.props.navigation.openDrawer()}>
             <Icon name='menu' style={styles.button} />
           </Button>
         </View>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 300 }}>
+        <View style={{justifyContent: 'center', alignItems: 'center', marginTop: '20%' }}>
           <Button iconLeft transparent onPress={()=>{ Linking.openURL('https://donate.giving.ufhealth.org/campaign/dance-marathon-at-florida-state-university-2020/c231597')}}>
-            <Text> Classy Link </Text>
-          </Button>
-          <Button iconLeft transparent onPress={this.consoleMessage}>
-            <Text> Test </Text>
+            <Text style={{color: 'white'}}> Login to Classy </Text>
           </Button>
         </View>  
       </View>
@@ -29,9 +26,9 @@ const styles = StyleSheet.create({
   height: '20%', 
  },
  button: {
-  paddingTop: '22%',
+  paddingTop: '25%',
   fontSize: 35, 
-  color: '#CEB888'
+  color: 'white'
  }
 });
 

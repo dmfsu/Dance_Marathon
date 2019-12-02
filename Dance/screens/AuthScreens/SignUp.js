@@ -78,6 +78,12 @@ export default class SignUp extends React.Component {
               Sign Up
             </Text>
           </Button>
+          <Button large block light rounded onPress={() => this.props.navigation.navigate('Dashboard')}>
+            <Text
+              style={{color: 'black', fontWeight: 'bold', fontSize: 15}}>
+              Back
+            </Text>
+          </Button>
         </View>
       </View>
     );
