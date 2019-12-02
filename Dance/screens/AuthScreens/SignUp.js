@@ -36,7 +36,7 @@ export default class SignUp extends React.Component {
         <View style={styles.formView}>
           <Form>
             <Item stackedLabel>
-              <Label style={{color: 'white', paddingBottom: 10}}>Username</Label>
+              <Label style={{color: 'white', paddingBottom: 10}}>First and Last name</Label>
               <Input 
                 style={{color: 'white', fontSize: 20}}
                 onChangeText={(text) => this.setState({Username: text})}/>
@@ -104,7 +104,7 @@ export default class SignUp extends React.Component {
         /* Alert the user if Sign in did not work */
         Alert.alert(
           'Couldn\'t Create User',
-          'Please try another password',
+          'Please try another password or username',
           [ {text: 'OK'} ],
           {cancelable: false},
         );

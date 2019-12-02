@@ -33,7 +33,7 @@ export default class SignInScreen extends React.Component {
         <View style={styles.formView}>
           <Form>
             <Item stackedLabel>
-              <Label style={{color: 'white', paddingBottom: 10}}>Username</Label>
+              <Label style={{color: 'white', paddingBottom: 10}}>Email</Label>
               <Input 
                 style={{color: 'white', fontSize: 20}}
                 onChangeText={(text) => this.setState({Username: text})}/>
@@ -69,8 +69,8 @@ export default class SignInScreen extends React.Component {
       
 
       axios.post('http://elmango.pythonanywhere.com/rest-auth/login/', {
-        email: this.state.Username , 
-        password: this.state.Password,
+        email: 'myemail@gmail.com', //this.state.Username , 
+        password: '123jason'//this.state.Password,
       })
       .then(async function (response) {
         try {
