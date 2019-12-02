@@ -25,6 +25,8 @@ export default class EventsPage extends React.Component {
       user_list: '',
       signedIn: false,
       modalVisible: false,
+      buttonToggle: true,
+      FLAG: 0,
       codeEntered: ''
     };
 
@@ -77,7 +79,7 @@ componentDidMount = () => {
       });
   }
 
-  getUserID = async (d) => {
+getUserID = async (d) => {
    try {
      let userID = await AsyncStorage.getItem('id')
      let userPoints = await AsyncStorage.getItem('points');
@@ -99,29 +101,48 @@ componentDidMount = () => {
  
  }
 
-  openModal = async(e) => {
-    if(this.state.signedIn == true){
-      this.setState({modalVisible:true, checkCode: e});
-    }
-    else{
-      Alert.alert("Guests can not check into events. Please sign in")
-    }
+openModal = async(e) => {
+  if(this.state.signedIn == true){
+     this.setState({modalVisible:true, checkCode: e});
+     this.state.modalVisible = true;
   }
+  else{
+     Alert.alert("Guests can not check into events. Please sign in")
+  }
+}
 
-  closeModal(){
-  		console.log(this.state.codeEntered);
-    	this.setState({modalVisible:false});
-  }
+closeModal(){
+  this.setState({modalVisible:false});
+  this.state.modalVisible = false;
+}
 
 
 changeText(x){
 	this.setState({codeEntered:x});
 }
 
+
 addPoints(pointsToAdd){
   let totalPoints = +this.state.points + +pointsToAdd
-  console.log("addPoints function, total Points:")
-  console.log(totalPoints)
+  console.log("Points added, current points: " + totalPoints)
+}
+
+//alerts and modals not currently working well together
+alertUser(flagValue){
+
+  if(flagValue == 1){
+    Alert.alert("Successful Checkin.")
+  }
+  else{
+    Alert.alert("Unsuccessful Checkin.")
+  }
+
+}
+
+//will be toggling buttons to unclickable upon successful checkin
+toggleStatus(){
+  this.setState({buttonToggle:!this.state.buttonToggle})
+  console.log("Button toggle is now: " + this.state.buttonToggle)
 }
 
 
@@ -130,7 +151,6 @@ addPoints(pointsToAdd){
       <ScrollView style={styles.container}>
         <Container>
           <Content>
-
             {this.state.events.map((data) => (
 
               <Card key={data.id}style={{ backgroundColor: '#782F40' }}>
@@ -175,19 +195,25 @@ addPoints(pointsToAdd){
 		                  	onChangeText={(codeEntered) => this.changeText(codeEntered)}/>
 		                  <Button style={{ backgroundColor: '#782F40', top:10 }}
 		                  	onPress={() => {this.closeModal(); 
+                          
 		                  			if((this.state.codeEntered) === this.state.checkCode){
                               //updatePoints();
-                              console.log("Success")
+                              this.state.FLAG = 1;
+                              this.toggleStatus();
                               this.addPoints(data.points)
 		                  			}
 		                  			else{
+                              this.state.FLAG = -1;
                               //error()
 		                  			}
-		                  	}}><Text>Submit</Text></Button>
+
+                          }}>
+                        <Text>Submit</Text>
+                        </Button>
 		                  		<Button style={{ backgroundColor: '#782F40', top:250,left:1,right:1 }}
 		              				onPress = {() => this.closeModal()}>
 		              				<Text>Back</Text>
-				        </Button>
+          				        </Button>
 		            	  </View>
 		        	    </View>
 		        	  </Modal>
