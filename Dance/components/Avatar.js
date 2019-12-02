@@ -14,7 +14,7 @@ export default function Avatar() {
         borderWidth: 1,
         marginTop: 10,
         alignSelf: 'center'}}
-      source={require('../assets/images/test.png.jpg')}
+      source={require('../assets/images/koala.png')}
     />
   );
 }

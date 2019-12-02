@@ -43,7 +43,7 @@ class SigningOut extends React.Component {
           <Image style={styles.pic}
             source={ require('../../assets/images/white.png')}
           />
-          <Text> Signing Out, please be patiet </Text>
+          <Text style={styles.message}> Signing Out </Text>
         </View>
       </View>
     );
@@ -75,6 +75,13 @@ const styles = StyleSheet.create({
   },
   logoView: {
     flex: 2,
+  },
+  message: {
+    alignSelf: 'center', 
+    fontSize: 35, 
+    color: 'white', 
+    fontWeight: 'bold',
+    paddingTop: '20%'
   },
 });
 
