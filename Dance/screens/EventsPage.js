@@ -28,6 +28,10 @@ export default class EventsPage extends React.Component {
       buttonToggle: true,
       FLAG: 0,
       flagEVENT: -1,
+      lat: null,
+      lng: null,
+      watchID: null,
+      geoFenceFlag: 0,
       codeEntered: ''
     };
 
@@ -88,7 +92,7 @@ getUserID = async (d) => {
      this.setState({ id: userID })
      this.setState({ points: userPoints })
 
-     if(userID == '-1'){
+     if(userID != '-1'){
        this.setState({
          signedIn: true
        })
@@ -119,7 +123,7 @@ closeModal(){
 
 
 changeText(x){
-	this.setState({codeEntered:x});
+  this.setState({codeEntered:x});
 }
 
 
@@ -143,14 +147,34 @@ alertUser(flagValue){
 //will be toggling buttons to unclickable upon successful checkin
 toggleStatus(){
   this.setState({buttonToggle:!this.state.buttonToggle})
-  console.log("Button toggle is now: " + this.state.buttonToggle)
 }
 
 changeFlagEvent(val){
   this.setState({ flagEVENT: val })
-  console.log("FROM IN FUNCTION" + val)
 }
 
+
+GEOLOCATE(){
+
+  navigator.geolocation.getCurrentPosition(this.geoSuccess);
+
+    console.log("Initial latitude: " + this.state.lat);
+    console.log("Initial longitude: " + this.state.lng);
+
+  this.setState({ geoFenceFlag: 1 })
+
+}
+
+geoSuccess = (position) => {
+
+  this.setState({
+    lat: position.coords.latitude,lng:position.coords.longitude 
+  })
+
+  console.log("Final latitude: " + this.state.lat);
+  console.log("Final longitude " + this.state.lng);
+
+}
 
   render() {
     return (
@@ -194,43 +218,54 @@ changeFlagEvent(val){
 
                 </CardItem>
                 
-	                <View style={styles.container}>
-		         		 <Modal
-		              visible={this.state.modalVisible}
-		              animationType={'slide'}
-		              onRequestClose={() => this.closeModal()}
-		         		 >
-		            <View style={styles.modalContainer}>
-		              <View style={styles.innerContainer}>
-		                  <TextInput style={{ height: 40, width: '90%', borderWidth: 2, backgroundColor: '#FFFFFF' }}
-		                  	placeholder="Enter Code"
-		                  	placeholderTextColor = "#000000"
-		                  	onChangeText={(codeEntered) => this.changeText(codeEntered)}/>
-		                  <Button style={{ backgroundColor: '#782F40', top:10 }}
-		                  	onPress={() => {this.closeModal(); 
-		                  			if((this.state.codeEntered) === this.state.checkCode){
+                  <View style={styles.container}>
+                 <Modal
+                  visible={this.state.modalVisible}
+                  animationType={'slide'}
+                  onRequestClose={() => this.closeModal()}
+                 >
+                <View style={styles.modalContainer}>
+                  <View style={styles.innerContainer}>
+                      <TextInput style={{ height: 40, width: '90%', borderWidth: 2, backgroundColor: '#FFFFFF' }}
+                        placeholder="Enter Code"
+                        placeholderTextColor = "#000000"
+                        onChangeText={(codeEntered) => this.changeText(codeEntered)}/>
+                      <Button style={{ backgroundColor: '#782F40', top:10 }}
+                        onPress={() => {this.closeModal(); 
+                            if((this.state.codeEntered) === this.state.checkCode){
                               //updatePoints();
+                              this.GEOLOCATE()
                               this.changeFlagEvent(data.id)
                               this.toggleStatus();
-                              this.addPoints(data.points);
-                              console.log("flagEvent: " + this.state.flagEvent)
-                              console.log("id " + data.id)
-		                  			}
-		                  			else{
+
+                              //if they are within range of the event
+                              if(this.state.geoFenceFlag == 1){
+                                this.addPoints(data.points);
+                              }
+                              //if they aren't no points
+                              else{
+                                console.log("Points NOT added.");
+                                console.log("Must be in range of event location.");
+                              }
+
+                              //reset the flag
+                              this.setState({ geoFenceFlag: 0 })
+                            }
+                            else{
                               //error()
-		                  			}
+                            }
 
                           }}>
                         <Text>Submit</Text>
                         </Button>
-		                  		<Button style={{ backgroundColor: '#782F40', top:250,left:1,right:1 }}
-		              				onPress = {() => this.closeModal()}>
-		              				<Text>Back</Text>
-          				        </Button>
-		            	  </View>
-		        	    </View>
-		        	  </Modal>
-		       		 </View>
+                          <Button style={{ backgroundColor: '#782F40', top:250,left:1,right:1 }}
+                          onPress = {() => this.closeModal()}>
+                          <Text>Back</Text>
+                          </Button>
+                    </View>
+                  </View>
+                </Modal>
+               </View>
 
               </Card>
 
