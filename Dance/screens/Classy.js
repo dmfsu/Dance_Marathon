@@ -1,6 +1,7 @@
 import React from 'react';
 import {Icon, Button, Text} from 'native-base';
 import { View, Linking, FlatList, StyleSheet} from 'react-native';
+import { Notifications } from 'expo';
 
 class Classy extends React.Component {
   render() {
@@ -15,7 +16,12 @@ class Classy extends React.Component {
           <Button iconLeft transparent onPress={()=>{ Linking.openURL('https://donate.giving.ufhealth.org/campaign/dance-marathon-at-florida-state-university-2020/c231597')}}>
             <Text style={{color: 'white'}}> Login to Classy </Text>
           </Button>
-        </View>  
+        </View>
+        <View style={{justifyContent: 'center', alignItems: 'center', marginTop: '20%' }}>
+          <Button iconLeft transparent onPress={()=>{ Linking.openURL('https://donate.giving.ufhealth.org/campaign/dance-marathon-at-florida-state-university-2020/c231597')}}>
+            <Text style={{color: 'white'}}> Login to Classy </Text>
+          </Button>
+        </View>    
       </View>
     );
   }

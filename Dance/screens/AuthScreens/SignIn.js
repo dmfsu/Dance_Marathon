@@ -74,7 +74,7 @@ export default class SignInScreen extends React.Component {
       then output an alert message saying to try again  */
       
 
-      axios.post('http://elmango.pythonanywhere.com/rest-auth/login/', {
+      axios.post('http://dmapi.pythonanywhere.com/rest-auth/login/', {
         email: this.state.Username , 
         password: this.state.Password,
       })
@@ -85,9 +85,9 @@ export default class SignInScreen extends React.Component {
           await AsyncStorage.setItem('AuthKey', JSON.stringify(response.data.key));          
           await AsyncStorage.setItem('id', JSON.stringify(response.data.user.id));
           await AsyncStorage.setItem('email', JSON.stringify(response.data.user.email));
-          await AsyncStorage.setItem('username', JSON.stringify(response.data.user.username));
-          await AsyncStorage.setItem('points', JSON.stringify(response.data.user.points));
-          await AsyncStorage.setItem('organization', JSON.stringify(response.data.user.organization));
+          //await AsyncStorage.setItem('username', JSON.stringify(response.data.user.username));
+          //await AsyncStorage.setItem('points', JSON.stringify(response.data.user.points));
+          //await AsyncStorage.setItem('organization', JSON.stringify(response.data.user.organization));
         }catch{
           console.log("Error Storing data")
         }

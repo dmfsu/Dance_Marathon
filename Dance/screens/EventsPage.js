@@ -39,7 +39,7 @@ export default class EventsPage extends React.Component {
 
 
 componentDidMount = () => {
-      fetch('http://elmango.pythonanywhere.com/events/?format=json', {
+      fetch('http://dmapi.pythonanywhere.com/events/?format=json', {
          method: 'GET'
       })
       .then((response) => response.json())
@@ -92,7 +92,7 @@ getUserID = async (d) => {
      this.setState({ id: userID })
      this.setState({ points: userPoints })
 
-     if(userID != '-1'){
+     if(userID == '-1'){
        this.setState({
          signedIn: true
        })
@@ -154,25 +154,36 @@ changeFlagEvent(val){
 }
 
 
-GEOLOCATE(){
+GEOLOCATE(lon, lat){
 
-  navigator.geolocation.getCurrentPosition(this.geoSuccess);
+  const coords = navigator.geolocation.getCurrentPosition(this.geoSuccess);
+  
 
-    console.log("Initial latitude: " + this.state.lat);
-    console.log("Initial longitude: " + this.state.lng);
+    console.log(coords);
+    console.log("Initial latitude: " + lat);
+    console.log("Initial longitude: " + lon);
 
-  this.setState({ geoFenceFlag: 1 })
+    this.setState({
+    lat: lat, lng:lon 
+  })
+
+  //this.setState({ geoFenceFlag: 1 })
 
 }
 
 geoSuccess = (position) => {
 
-  this.setState({
-    lat: position.coords.latitude,lng:position.coords.longitude 
-  })
+  //console.log("Old is: " + this.state.lat + " and new is " + position.coords.latitude)
+  console.log("Final latitude: " + position.coords.latitude);
+  console.log("Final longitude " + position.coords.longitude);
+  
+  if(this.state.lat != position.coords.latitude){
+     this.setState({ geoFenceFlag: 0 })
+  }
 
-  console.log("Final latitude: " + this.state.lat);
-  console.log("Final longitude " + this.state.lng);
+  if(this.state.lng != position.coords.longitude){
+     this.setState({ geoFenceFlag: 0 })
+  }
 
 }
 
@@ -234,7 +245,7 @@ geoSuccess = (position) => {
                         onPress={() => {this.closeModal(); 
                             if((this.state.codeEntered) === this.state.checkCode){
                               //updatePoints();
-                              this.GEOLOCATE()
+                              this.GEOLOCATE(data.lon,data.lat)
                               this.changeFlagEvent(data.id)
                               this.toggleStatus();
 

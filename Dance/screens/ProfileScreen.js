@@ -17,6 +17,9 @@ export default class ProfileScreen extends React.Component {
     header: null,
   };
   
+//Admin Account 
+//username: admin
+//password: puppiesids123
 
   //The only state variable is Signed in to tell which screen to display
   constructor(props){
@@ -40,7 +43,7 @@ export default class ProfileScreen extends React.Component {
     if (value !== '0') {
         this.setState({
           signedIn: true,
-          username: await AsyncStorage.getItem('username')
+          username: "jason"
         })
     }
     else{

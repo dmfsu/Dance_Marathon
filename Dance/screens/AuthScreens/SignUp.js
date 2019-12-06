@@ -96,7 +96,7 @@ export default class SignUp extends React.Component {
       /* Try to sign in the user. If the username or pass word doesnt work,
       then output an alert message saying to try again  */
       
-      axios.post('http://elmango.pythonanywhere.com/rest-auth/registration/', {
+      axios.post('http://dmapi.pythonanywhere.com/rest-auth/registration/', {
 		    "username": this.state.Username,
 		    "email": this.state.Email,
 		    "password1": this.state.Password,
@@ -106,7 +106,7 @@ export default class SignUp extends React.Component {
       .then(function (response) {
       	props.navigation.navigate('SignIn');
       })
-      .catch(function () {
+      .catch(function (response) {
         /* Alert the user if Sign in did not work */
         Alert.alert(
           'Couldn\'t Create User',
@@ -114,6 +114,7 @@ export default class SignUp extends React.Component {
           [ {text: 'OK'} ],
           {cancelable: false},
         );
+        console.log(response.email)
       })
   }
 } 
