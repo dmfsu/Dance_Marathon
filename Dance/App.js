@@ -1,10 +1,16 @@
-import {AppLoading} from 'expo';
-import {Asset} from 'expo-asset';
-import * as Font from 'expo-font';
-import React, {useState} from 'react';
-import {Platform, StatusBar, AsyncStorage, StyleSheet, View} from 'react-native';
-import {Ionicons} from '@expo/vector-icons';
-import AppNavigator from './navigation/AppNavigator';
+import { AppLoading } from "expo";
+import { Asset } from "expo-asset";
+import * as Font from "expo-font";
+import React, { useState } from "react";
+import {
+  Platform,
+  StatusBar,
+  AsyncStorage,
+  StyleSheet,
+  View
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import AppNavigator from "./navigation/AppNavigator";
 
 /** @return {app} */
 export default function App(props) {
@@ -21,7 +27,7 @@ export default function App(props) {
   } else {
     return (
       <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        {Platform.OS === "ios" && <StatusBar barStyle="default" />}
         <AppNavigator />
       </View>
     );
@@ -32,22 +38,21 @@ export default function App(props) {
 async function loadResourcesAsync() {
   await Promise.all([
     Asset.loadAsync([
-      require('./assets/images/robot-dev.png'),
-      require('./assets/images/robot-prod.png'),
+      require("./assets/images/robot-dev.png"),
+      require("./assets/images/robot-prod.png")
     ]),
     Font.loadAsync({
       // This is the font that we are using for our tab bar
       ...Ionicons.font,
       // We include SpaceMono because we use it in HomeScreen.js. Feel free to
       // remove this if you are not using it in your app
-      Roboto: require('./node_modules/native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('./node_modules/native-base/Fonts/Roboto_medium.ttf'),
-      SavoyeLetPlain: require('./assets/fonts/SavoyeLetPlain.ttf'),
-      ChalkboardSELight: require('./assets/fonts/chalkboard-se-light.ttf'),
-    }),
+      Roboto: require("./node_modules/native-base/Fonts/Roboto.ttf"),
+      Roboto_medium: require("./node_modules/native-base/Fonts/Roboto_medium.ttf"),
+      SavoyeLetPlain: require("./assets/fonts/SavoyeLetPlain.ttf"),
+      ChalkboardSELight: require("./assets/fonts/chalkboard-se-light.ttf")
+    })
   ]);
 }
-
 
 function handleLoadingError(error) {
   // In this case, you might want to report the error to your error reporting
@@ -62,6 +67,6 @@ function handleFinishLoading(setLoadingComplete) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
+    backgroundColor: "#fff"
+  }
 });
