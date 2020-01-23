@@ -104,7 +104,7 @@ export default class SignUp extends React.Component {
 		    "organization": this.state.Organization,
 		})
       .then(function (response) {
-      	props.navigation.navigate('SignIn');
+      	props.navigation.navigate('LoadinIn');
       })
       .catch(function (response) {
         /* Alert the user if Sign in did not work */

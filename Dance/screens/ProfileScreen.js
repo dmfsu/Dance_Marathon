@@ -16,10 +16,6 @@ export default class ProfileScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
-  
-//Admin Account 
-//username: admin
-//password: puppiesids123
 
   //The only state variable is Signed in to tell which screen to display
   constructor(props){
@@ -32,18 +28,12 @@ export default class ProfileScreen extends React.Component {
 
   //Changes the look of the profile screen depending on if the user
   //is signed in or not
-  componentDidMount(){
-    this._retrieveData()
-  }
-
-  _retrieveData = async () => {
-    let value = '';
+  async componentDidMount(): Promise<void>{
   try {
-    value = await AsyncStorage.getItem('AuthKey');
-    if (value !== '0') {
+    if (await AsyncStorage.getItem('AuthKey') !== '0') {
         this.setState({
           signedIn: true,
-          username: "jason"
+          username: await AsyncStorage.getItem('id'),
         })
     }
     else{
@@ -55,7 +45,6 @@ export default class ProfileScreen extends React.Component {
   }
 };
 
-
   showGuest(){
     return(
         <BackDropBottomGuest signIn= {() => this.props.navigation.navigate('SignIn')} 
@@ -66,7 +55,7 @@ export default class ProfileScreen extends React.Component {
   decideScreen(){
       if(this.state.signedIn === true){
         return (
-            <BackDropBottom signOutNav = {() => this.props.navigation.navigate('Loading')} />
+            <BackDropBottom signOutNav = {() => this.props.navigation.navigate('LoadingOut')} />
           )
       }
       else {
@@ -91,7 +80,6 @@ export default class ProfileScreen extends React.Component {
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   //Style for the android bar, needs work

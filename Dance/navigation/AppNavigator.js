@@ -4,13 +4,15 @@ import {
 } from 'react-navigation';
 import AuthStack from './AuthStack';
 import appDrawerNavigator from './DrawerNavigator';
-import LoadingStack from './LoadingNavigator';
+import SignInStack from './SignInStack';
+import SignOutStack from './SignOutStack';
 
 export default createAppContainer(
     createSwitchNavigator({
       Auth: AuthStack,
       Dashboard: appDrawerNavigator,
-      Loading: LoadingStack,
+      LoadingIn: SignInStack,
+      LoadingOut: SignOutStack,
     },
     {
       initialRouteName: 'Dashboard',

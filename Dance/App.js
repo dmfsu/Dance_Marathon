@@ -9,7 +9,7 @@ import {
   StyleSheet,
   View
 } from "react-native";
-port { Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import AppNavigator from "./navigation/AppNavigator";
 
 /** @return {app} */
@@ -71,14 +71,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBi9kzXlehm5kXZPBBrFoRYNudv3YEGfnc",
-  authDomain: "dance-marathon.firebaseapp.com",
-  databaseURL: "https://dance-marathon.firebaseio.com",
-  storageBucket: "dance-marathon.appspot.com"
-};
-
-firebase.initializeApp(firebaseConfig);
 
 /*
 <!-- The core Firebase JS SDK is always required and must be listed first -->

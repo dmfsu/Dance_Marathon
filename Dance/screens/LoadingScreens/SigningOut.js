@@ -20,6 +20,7 @@ class SigningOut extends React.Component {
 
   componentDidMount(){
     setTimeout( () => {
+        console.log("BAD MOUNT")
         this._signOut();
         this.props.navigation.navigate('Dashboard');
     }, 800 );
@@ -27,7 +28,7 @@ class SigningOut extends React.Component {
 
   _signOut = async () => {
     try {
-      await AsyncStorage.setItem('id', '-1')
+      //await AsyncStorage.setItem('id', '-1')
       await AsyncStorage.setItem('AuthKey', '0');
 
     } catch (error) {

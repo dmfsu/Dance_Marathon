@@ -11,12 +11,13 @@ class SigningIn extends React.Component {
     header: null,
   };
 
-  componentDidMount(){
+  async componentDidMount(): Promise<void>{
     setTimeout( () => {
         this.props.navigation.navigate('Dashboard');
-    }, 800 );
+    }, 800 ),
+    console.log(await AsyncStorage.getItem('id'));  
+    return Promise.resolve();
   }
-
 
   /** @return {screen} */
   render() {
@@ -31,8 +32,6 @@ class SigningIn extends React.Component {
     );
   }
 }
-
-// End of Code basically
 
 export default SigningIn;
 

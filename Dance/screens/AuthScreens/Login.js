@@ -5,13 +5,11 @@ import {
   Text,
 } from 'native-base';
 
-// Make each screen a class that extends React.Component, its easier to
-// work with rather than making them functions.
-
 //sign up: first/last name, organization, email(use the same as )
 
 /** This is a JSDoc comment */
 class LoginHome extends React.Component {
+ 
   static navigationOptions = {
     header: null,
   };
@@ -26,13 +24,13 @@ class LoginHome extends React.Component {
           />
         </View>
         <View style={styles.buttonView}>
-          <Button large block light rounded onPress={this._signInAsync}>
+          <Button large block light rounded onPress={this._signIn}>
             <Text
               style={{color: 'black', fontWeight: 'bold', fontSize: 15}}>
               Sign in
             </Text>
           </Button>
-          <Button large block light rounded onPress={this._signUpAsync}>
+          <Button large block light rounded onPress={this._signUp}>
             <Text
               style={{color: 'black', fontWeight: 'bold', fontSize: 15}}>
               Sign Up
@@ -43,19 +41,15 @@ class LoginHome extends React.Component {
     );
   }
 
-  // This is what authenticates the sign in
-  _signInAsync = async () => {
-    await AsyncStorage.setItem('userToken', 'abc');
+  // These take you to the sign in and sign up pages repectively 
+  _signIn = async () => {
     this.props.navigation.navigate('SignIn');
   };
 
- _signUpAsync = async () => {
-    await AsyncStorage.setItem('userToken', 'abc');
+ _signUp = async () => {
     this.props.navigation.navigate('SignUp');
   };
 }
-
-// End of Code basically
 
 export default LoginHome;
 

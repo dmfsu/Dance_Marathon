@@ -67,16 +67,18 @@ export default class SignInScreen extends React.Component {
   }
 
 
+  //Email:  email@email.com
+  //Passwprd: fake123account
+
   _signInAsync = async () => {
       var props = this.props;
       
-      /* Try to sign in the user. If the username or pass word doesnt work,
+      /* Try to sign in the user. If the username or password doesnt work,
       then output an alert message saying to try again  */
-      
 
       axios.post('http://dmapi.pythonanywhere.com/rest-auth/login/', {
-        email: this.state.Username , 
-        password: this.state.Password,
+        email: 'email@email.com',//this.state.Username , 
+        password: 'fake123account'//this.state.Password,
       })
       .then(async function (response) {
         try {
@@ -85,13 +87,14 @@ export default class SignInScreen extends React.Component {
           await AsyncStorage.setItem('AuthKey', JSON.stringify(response.data.key));          
           await AsyncStorage.setItem('id', JSON.stringify(response.data.user.id));
           await AsyncStorage.setItem('email', JSON.stringify(response.data.user.email));
+          //Currently not passing these when we sign in
           //await AsyncStorage.setItem('username', JSON.stringify(response.data.user.username));
           //await AsyncStorage.setItem('points', JSON.stringify(response.data.user.points));
           //await AsyncStorage.setItem('organization', JSON.stringify(response.data.user.organization));
         }catch{
           console.log("Error Storing data")
         }
-        props.navigation.navigate('SigningIn');
+        props.navigation.navigate('LoadingIn');
       })
       .catch(function () {
         /* Alert the user if Sign in did not work */
@@ -104,8 +107,6 @@ export default class SignInScreen extends React.Component {
       })
   }
 } 
-
-
 
 const styles = StyleSheet.create({
   pic: {

@@ -120,7 +120,7 @@ export default class EventsPage extends React.Component {
       this.setState({ id: userID });
       this.setState({ points: userPoints });
 
-      if (userID == "-1") {
+      if (userID === "-1") {
         this.setState({
           signedIn: true
         });
