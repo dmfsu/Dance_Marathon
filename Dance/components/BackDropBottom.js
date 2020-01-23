@@ -1,8 +1,21 @@
 import React from 'react';
-import { Container, Header, Content, Card, CardItem, Body, Text, Button } from 'native-base';
-import {View, StyleSheet, ScrollView, AsyncStorage} from 'react-native';
+import { 
+  Container, 
+  Header, 
+  Content, 
+  Card, 
+  CardItem, 
+  Body, 
+  Text, 
+  Button } from 'native-base';
+import {
+  View, 
+  StyleSheet, 
+  ScrollView, 
+  AsyncStorage} from 'react-native';
+import firebase from "../Firebase";
 
-/** top of the profile page color */
+/* top of the profile page color */
 export default class BackDropBottom extends React.Component {
   constructor(props) {
     super(props);
@@ -14,6 +27,17 @@ export default class BackDropBottom extends React.Component {
 
   }
 
+  componentDidMount(){
+    var user = firebase.auth().currentUser;
+    if (user) {
+      this.setState({
+        name: user.displayName
+      })
+    } else {
+      console.log("no one is signed in sorry");
+    }
+  }
+
   leave(){
     this.props.signOutNav;
   }
@@ -21,9 +45,9 @@ export default class BackDropBottom extends React.Component {
   _getData = async () => {
     try {
       this.setState({
-        name: await AsyncStorage.getItem('username'),
-        organization:  await AsyncStorage.getItem('organization'), 
-        points:  await AsyncStorage.getItem('points'),
+        //name: await AsyncStorage.getItem('username'),
+        //organization:  await AsyncStorage.getItem('organization'), 
+        //points:  await AsyncStorage.getItem('points'),
       })
     } catch (error) {
       console.log('Couldnt sign out')
@@ -53,7 +77,7 @@ export default class BackDropBottom extends React.Component {
                    Organization: 
                 </Text>
                 <Text style={styles.data}>
-                  {this.state.organization}
+                  {this.state.name}
                 </Text>
               </View>
               <View style={styles.cardBody}>

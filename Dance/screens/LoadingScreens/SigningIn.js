@@ -14,8 +14,7 @@ class SigningIn extends React.Component {
   async componentDidMount(): Promise<void>{
     setTimeout( () => {
         this.props.navigation.navigate('Dashboard');
-    }, 800 ),
-    console.log(await AsyncStorage.getItem('id'));  
+    }, 800 )
     return Promise.resolve();
   }
 

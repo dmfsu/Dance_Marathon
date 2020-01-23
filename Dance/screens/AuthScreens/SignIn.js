@@ -10,9 +10,8 @@ import {
   Label,
 } from 'native-base';
 
-/* The LoginHome is where the user will sign in. Upon a successful
-sign in, they are sent to a loading screen at "SigningIn.js" to reload
-the profile component. */
+import firebase from "../../Firebase";
+
 
 export default class SignInScreen extends React.Component {
   static navigationOptions = {
@@ -49,7 +48,7 @@ export default class SignInScreen extends React.Component {
           </Form>
         </View>
         <View style={styles.buttonView}>
-          <Button large block light rounded onPress={() => this._signInAsync()}>
+          <Button large block light rounded onPress={() => this._signInAs()}>
             <Text
               style={{color: 'black', fontWeight: 'bold', fontSize: 15}}>
               Sign in
@@ -70,20 +69,43 @@ export default class SignInScreen extends React.Component {
   //Email:  email@email.com
   //Passwprd: fake123account
 
-  _signInAsync = async () => {
+  _signInAs = async () => {
+    var props = this.props;
+    firebase
+    .auth()
+    .signInWithEmailAndPassword('mytest@gmail.com', 'DirtySock')
+    .then(async function(response){
+      //console.log(response.user);
+      await AsyncStorage.setItem('AuthKey', 'Testing');
+      props.navigation.navigate('LoadingIn');
+    })    
+    .catch(function(error) {
+      //Handle Errors here
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      if (errorCode === 'auth/wrong-password') {
+        alert('Wrong password.');
+      } else {
+        alert(errorMessage);
+      }
+      console.log(error);
+    });
+}
+
+ /* _signInAsync = async () => {
       var props = this.props;
       
       /* Try to sign in the user. If the username or password doesnt work,
       then output an alert message saying to try again  */
 
-      axios.post('http://dmapi.pythonanywhere.com/rest-auth/login/', {
+      /*axios.post('http://dmapi.pythonanywhere.com/rest-auth/login/', {
         email: 'email@email.com',//this.state.Username , 
         password: 'fake123account'//this.state.Password,
       })
       .then(async function (response) {
         try {
         /* Store variables for whole app */
-          console.log(response.data)
+          /*console.log(response.data)
           await AsyncStorage.setItem('AuthKey', JSON.stringify(response.data.key));          
           await AsyncStorage.setItem('id', JSON.stringify(response.data.user.id));
           await AsyncStorage.setItem('email', JSON.stringify(response.data.user.email));
@@ -98,15 +120,15 @@ export default class SignInScreen extends React.Component {
       })
       .catch(function () {
         /* Alert the user if Sign in did not work */
-        Alert.alert(
+        /*Alert.alert(
           'Couldn\'t Sign In',
           'The email or password you entered is invalid. Please try again.',
           [ {text: 'OK'} ],
           {cancelable: false},
         );
       })
-  }
-} 
+  }*/
+}
 
 const styles = StyleSheet.create({
   pic: {

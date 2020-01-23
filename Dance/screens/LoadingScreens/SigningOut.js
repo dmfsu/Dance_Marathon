@@ -6,6 +6,8 @@ import {
   Text,
 } from 'native-base';
 
+import firebase from "../../Firebase";
+
 // Make each screen a class that extends React.Component, its easier to
 // work with rather than making them functions.
 
@@ -19,21 +21,22 @@ class SigningOut extends React.Component {
 
 
   componentDidMount(){
+    this._signOut();
     setTimeout( () => {
-        console.log("BAD MOUNT")
-        this._signOut();
         this.props.navigation.navigate('Dashboard');
     }, 800 );
 }
 
   _signOut = async () => {
-    try {
-      //await AsyncStorage.setItem('id', '-1')
-      await AsyncStorage.setItem('AuthKey', '0');
-
-    } catch (error) {
-      console.log('Couldnt sign out')
-    }
+    firebase.auth().signOut();
+    firebase.auth().onAuthStateChanged(async function(user) {
+      if (user) {
+        // User is signed in.
+      } else {
+        // No user is signed in.
+        await AsyncStorage.setItem('AuthKey', '0');
+      }
+    });
   }
 
   /** @return {screen} */

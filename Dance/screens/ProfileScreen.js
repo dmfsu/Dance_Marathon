@@ -8,7 +8,7 @@ import {
 import BackDropTop from '../components/BackDropTop';
 import BackDropBottom from '../components/BackDropBottom';
 import BackDropBottomGuest from '../components/BackDropBottomGuest';
-import * as SecureStore from 'expo-secure-store';
+import firebase from "../Firebase";
 
 //Class rather than a function to make use of state variables
 
@@ -29,20 +29,14 @@ export default class ProfileScreen extends React.Component {
   //Changes the look of the profile screen depending on if the user
   //is signed in or not
   async componentDidMount(): Promise<void>{
-  try {
-    if (await AsyncStorage.getItem('AuthKey') !== '0') {
+    if (await AsyncStorage.getItem('AuthKey') === 'Testing') {
         this.setState({
           signedIn: true,
-          username: await AsyncStorage.getItem('id'),
         })
     }
     else{
         this.setState({signedIn: false})
     }
-  } catch (error) {
-    // Error retrieving data
-    console.log('Couldn\'t read AuthKey');
-  }
 };
 
   showGuest(){
