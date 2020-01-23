@@ -29,6 +29,7 @@ import {
   Item
 } from "native-base";
 import { ExpoLinksView } from "@expo/samples";
+import EventCard from "../components/EventCard";
 
 const description1 = [{ title: "More:", content: "blah" }];
 
@@ -204,10 +205,20 @@ export default class EventsPage extends React.Component {
 
   render() {
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Container>
-          <Content>
+          <Header/>
+          <Content >
             {this.state.events.map(data => (
+                <EventCard
+                key={data.id}
+                name={data.name}
+                place={data.place}
+                code={data.code}
+                points={data.points}
+                time={data.time}
+                />
+                /*
               <Card key={data.id} style={{ backgroundColor: "#782F40" }}>
                 <CardItem header style={{ backgroundColor: "#782F40" }}>
                   <Left>
@@ -332,6 +343,8 @@ export default class EventsPage extends React.Component {
                   </Modal>
                 </View>
               </Card>
+
+                 */
             ))}
           </Content>
         </Container>
@@ -347,7 +360,7 @@ EventsPage.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
+    margin: 15,
     backgroundColor: "#fff"
   },
   modalContainer: {

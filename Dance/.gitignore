@@ -10,4 +10,5 @@ npm-debug.*
 web-build/
 web-report/
 package-lock.json
+.idea/
 
